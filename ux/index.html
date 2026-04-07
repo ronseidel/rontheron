@@ -4,12 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ron Seidel — Product Designer</title>
-
-  <!-- Meta -->
   <meta name="description" content="Ron Seidel — Lead Product Designer with 13+ years designing regulated, high-stakes platforms across finance, cybersecurity, healthcare, and logistics.">
   <meta name="author" content="Ron Seidel">
-
-  <!-- OG -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rontheron.com/ux">
   <meta property="og:title" content="Ron Seidel — Product Designer">
@@ -17,24 +13,31 @@
   <meta property="og:image" content="https://rontheron.com/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ron Seidel — Product Designer">
   <meta name="twitter:description" content="13+ years designing complex, regulated platforms. Currently embedded at a top-tier global investment bank through Publicis Sapient.">
   <meta name="twitter:image" content="https://rontheron.com/og.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-
   <style>
     /*
     ============================================================
     PORTFOLIO — Ron Seidel · rontheron.com/ux
     v01 — 2026-04-03 — Initial direction: editorial minimalism
     v02–v17 — 2026-04-06 — Iterative refinements
-    v18 — 2026-04-06 — Full rewrite: fixed nav selector bug causing
-                        bottom-nav to inherit top:0 and become full-height overlay
+    v18 — 2026-04-06 — Full rewrite: fixed nav selector bug
+    v19 — 2026-04-07 — Mobile: keep RON. logo centered at top
+    v20 — 2026-04-07 — Added case study 1 wireframe images with animated gradient border
+    v21 — 2026-04-07 — Removed border-radius, thinner/lighter border, green glow shadow, slower animation (10s)
+    v22 — 2026-04-07 — Swapped wireframe images, moved images above metrics, softer shadow
+    v23 — 2026-04-07 — Added unified experience image to case study 2
+    v24 — 2026-04-07 — Removed border/shadow from case study 2 image
+    v25 — 2026-04-07 — Centered meta, headline, and footnote for case study 2
+    v26 — 2026-04-07 — CS2: stacked meta, shorter headline, added "2 teams united" metric
+    v27 — 2026-04-07 — Simplified teams metric, added SOP bullet to CS2
+    v28 — 2026-04-07 — Restored "4 legacy systems" metric, dropped "2 teams united"
+    v29 — 2026-04-07 — Fixed "1" metric to DM Sans, fixed mobile metric border bug
+    v30 — 2026-04-07 — Spelled out One/Four for serif consistency, added 5-10x metric to CS1
     ============================================================
     */
 
@@ -61,7 +64,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── TOP NAV (nav#nav only — not bottom-nav) ── */
     nav#nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -76,7 +78,6 @@
       transition: border-color 0.3s;
     }
     nav#nav.scrolled { border-bottom-color: var(--border); }
-
     .nav-logo {
       font-family: var(--sans);
       font-size: 14px;
@@ -87,7 +88,6 @@
       color: var(--ink);
     }
     .nav-logo span { color: var(--accent); }
-
     .nav-links {
       display: flex;
       gap: 36px;
@@ -106,7 +106,6 @@
     .nav-links a.cta { color: var(--accent); font-weight: 500; }
     .nav-links a.cta:hover { color: var(--ink); }
 
-    /* ── BOTTOM NAV (mobile only) ── */
     nav#bottom-nav {
       display: none;
       position: fixed;
@@ -142,7 +141,6 @@
       text-transform: uppercase;
     }
 
-    /* ── LAYOUT ── */
     .container {
       max-width: var(--max);
       margin: 0 auto;
@@ -151,7 +149,6 @@
     section { padding: 120px 0; }
     hr.rule { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-    /* ── FADE IN ── */
     .reveal {
       opacity: 0;
       transform: translateY(24px);
@@ -159,7 +156,6 @@
     }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ── HERO ── */
     #hero {
       padding-top: 200px;
       padding-bottom: 140px;
@@ -216,7 +212,6 @@
     .btn-ghost { border-color: var(--border); color: var(--muted); }
     .btn-ghost:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
-    /* ── SECTION LABEL ── */
     .section-label {
       font-family: var(--sans);
       font-size: 11px;
@@ -236,7 +231,6 @@
       background: var(--border);
     }
 
-    /* ── CASE STUDIES ── */
     #work { padding-top: 80px; }
     .case-study { margin-bottom: 120px; }
     .case-meta {
@@ -278,7 +272,6 @@
       max-width: 760px;
     }
 
-    /* Metrics */
     .metrics {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -325,6 +318,54 @@
       margin-top: 10px;
     }
 
+    /* ── CASE STUDY IMAGES ── */
+    @keyframes borderShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .case-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .case-images--single {
+      grid-template-columns: 1fr;
+    }
+    .case-images--plain .case-image-wrap {
+      padding: 0;
+      background: none;
+      animation: none;
+      box-shadow: none;
+    }
+    .case-image-wrap {
+      position: relative;
+      padding: 1px;
+      background: linear-gradient(
+        90deg,
+        rgba(0,187,119,0.08) 0%,
+        rgba(0,187,119,0.3) 30%,
+        rgba(0,187,119,0.1) 50%,
+        rgba(0,187,119,0.3) 70%,
+        rgba(0,187,119,0.08) 100%
+      );
+      background-size: 250% 100%;
+      animation: borderShift 10s ease-in-out infinite;
+      box-shadow:
+        0 4px 32px rgba(0,187,119,0.06),
+        0 1px 8px rgba(0,187,119,0.03);
+    }
+    .case-image-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+
+    .case-study--centered .case-meta { flex-direction: column; align-items: center; text-align: center; }
+    .case-study--centered .case-title { text-align: center; max-width: 860px; margin-left: auto; margin-right: auto; }
+    .case-study--centered .metrics-footnote { text-align: center; }
+
     .case-body {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -344,7 +385,6 @@
     .case-bullets li:first-child { border-top: 1px solid var(--border); }
     .case-divider { border: none; border-top: 1px solid var(--border); margin-bottom: 80px; }
 
-    /* ── ABOUT ── */
     #about .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -388,11 +428,9 @@
     }
     .contact-links a:hover { color: var(--accent); }
 
-    /* ── QUOTES ── */
     #quotes { background: var(--ink); padding: 120px 0; }
     #quotes .section-label { color: rgba(255,255,255,0.3); }
     #quotes .section-label::after { background: rgba(255,255,255,0.1); }
-
     .quote-featured {
       padding: 56px;
       border: 1px solid rgba(255,255,255,0.12);
@@ -408,7 +446,6 @@
     }
     .quote-featured .quote-attr { color: rgba(255,255,255,0.4); }
     .quote-featured .quote-attr strong { color: rgba(255,255,255,0.75); }
-
     .quotes-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -455,7 +492,6 @@
       margin-bottom: 2px;
     }
 
-    /* ── IMPACT ── */
     #impact .impact-list { list-style: none; }
     #impact .impact-list li {
       display: grid;
@@ -470,7 +506,6 @@
     .impact-desc { font-size: 15px; font-weight: 400; color: var(--ink); line-height: 1.5; }
     .impact-desc small { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; font-weight: 300; }
 
-    /* ── FOOTER ── */
     footer { border-top: 1px solid var(--border); padding: 48px 0; }
     .footer-inner {
       display: flex;
@@ -493,45 +528,38 @@
     .footer-links a:hover { color: var(--ink); }
     .footer-copy { font-size: 12px; color: rgba(0,0,0,0.2); }
 
-    /* ── RESPONSIVE: TABLET ── */
     @media (max-width: 768px) {
       section { padding: 72px 0; }
       #work { padding-top: 48px; }
-
-      /* hide top nav, show bottom nav */
-      nav#nav { display: none; }
+      nav#nav { justify-content: center; }
+      .nav-links { display: none; }
       nav#bottom-nav { display: block; }
       body { padding-bottom: 72px; }
-
-      /* hero — no top nav, reduce padding */
-      #hero { padding-top: 80px; padding-bottom: 72px; min-height: 0; }
+      #hero { padding-top: 100px; padding-bottom: 72px; min-height: 0; }
       .hero-eyebrow { flex-wrap: wrap; }
       .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
       .hero-actions .btn { width: 100%; text-align: center; }
-
       .case-body { grid-template-columns: 1fr; gap: 32px; }
+      .case-images { grid-template-columns: 1fr; gap: 16px; }
       #about .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .quotes-grid { grid-template-columns: 1fr; }
       .quote-featured { padding: 32px; margin-bottom: 32px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
-
       #impact .impact-list li { grid-template-columns: 52px 1fr; gap: 16px; }
-
       .metrics { grid-template-columns: repeat(2, 1fr); }
-      .metric { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-      .metric:nth-child(3n) { border-right: 1px solid var(--border); }
+      .metric,
+      .metric:nth-last-child(-n+3):nth-child(3n+1),
+      .metric:nth-last-child(-n+3):nth-child(3n+1) ~ .metric { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
       .metric:nth-child(2n) { border-right: none; }
       .metric:nth-last-child(-n+2) { border-bottom: none; }
-      /* ID-specific overrides (beat section{} specificity) */
       #quotes { padding: 72px 0; }
       .case-study { margin-bottom: 72px; }
       .case-divider { margin-bottom: 48px; }
       .section-label { margin-bottom: 40px; }
     }
 
-    /* ── RESPONSIVE: MOBILE ── */
     @media (max-width: 480px) {
-      #hero { padding-top: 60px; padding-bottom: 56px; }
+      #hero { padding-top: 100px; padding-bottom: 56px; }
       .hero-headline { font-size: clamp(36px, 10vw, 56px); margin-bottom: 36px; }
       .metric { padding: 20px 16px; }
       .metric-value { font-size: clamp(28px, 7vw, 42px); }
@@ -543,7 +571,6 @@
 </head>
 <body>
 
-  <!-- TOP NAV -->
   <nav id="nav">
     <a href="#hero" class="nav-logo">Ron<span>.</span></a>
     <ul class="nav-links">
@@ -554,7 +581,6 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <section id="hero">
     <div class="container">
       <p class="hero-eyebrow reveal"><span class="eyebrow-title">Product Designer</span>&ensp;·&ensp;13+ Years&ensp;·&ensp;NYC / NJ / Remote</p>
@@ -570,12 +596,10 @@
 
   <hr class="rule">
 
-  <!-- WORK -->
   <section id="work">
     <div class="container">
       <p class="section-label reveal">Selected Work</p>
 
-      <!-- Case Study 1 -->
       <div class="case-study reveal">
         <div class="case-meta">
           <span class="case-index">01</span>
@@ -585,6 +609,16 @@
           </div>
         </div>
         <h2 class="case-title">Designing the platform wealth advisors use to move billions.</h2>
+
+        <div class="case-images reveal">
+          <div class="case-image-wrap">
+            <img src="wireframe-1.png" alt="Advisor dashboard wireframe showing welcome screen, pending actions, and account overview">
+          </div>
+          <div class="case-image-wrap">
+            <img src="wireframe-2.png" alt="Solution selection wireframe showing filterable card grid with approval flow">
+          </div>
+        </div>
+
         <div class="metrics">
           <div class="metric">
             <div class="metric-value">95<span class="accent">%+</span></div>
@@ -609,8 +643,14 @@
             <div class="metric-label">Saved per account action</div>
             <div class="metric-note">Projected</div>
           </div>
+          <div class="metric">
+            <div class="metric-value">5–10<span class="accent">x</span></div>
+            <div class="metric-label">Accounts opened by 2027</div>
+            <div class="metric-note">Projected</div>
+          </div>
         </div>
         <p class="metrics-footnote">Metrics reflect a mix of internal reporting and directional stakeholder estimates.</p>
+
         <div class="case-body">
           <p class="case-desc">
             Primary designer for three new products and a year-defining initiative at a top-tier global investment bank, embedded through Publicis Sapient. Partnered with two engineering squads and multiple product managers across prospecting, onboarding, and account management.
@@ -626,8 +666,7 @@
 
       <hr class="case-divider">
 
-      <!-- Case Study 2 -->
-      <div class="case-study reveal">
+      <div class="case-study case-study--centered reveal">
         <div class="case-meta">
           <span class="case-index">02</span>
           <div class="case-meta-text">
@@ -635,7 +674,14 @@
             <span class="case-sub">Asset Manager · 2022 – 2023</span>
           </div>
         </div>
-        <h2 class="case-title">Unifying four fragmented systems into one — managing tens of billions daily.</h2>
+        <h2 class="case-title">Unifying four fragmented systems — managing tens of billions daily.</h2>
+
+        <div class="case-images case-images--single case-images--plain reveal">
+          <div class="case-image-wrap">
+            <img src="unified-experience.png" alt="Unified funds management platform shown across multiple devices — dashboard, fund details, and create new fund views">
+          </div>
+        </div>
+
         <div class="metrics">
           <div class="metric">
             <div class="metric-value">75<span class="accent">%</span></div>
@@ -654,8 +700,12 @@
             <div class="metric-label">Time saved on rebalancing</div>
           </div>
           <div class="metric">
-            <div class="metric-value accent" style="font-size:42px;line-height:1.1;">1</div>
+            <div class="metric-value">One</div>
             <div class="metric-label">Catastrophic error averted</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">Four</div>
+            <div class="metric-label">Legacy systems combined into one</div>
           </div>
         </div>
         <p class="metrics-footnote">Sourced from stakeholder estimates.</p>
@@ -668,6 +718,7 @@
             <li>Introduced a novel approval pattern improving operational confidence and auditability</li>
             <li>Reduced fund creation time by 1.5 hours and common task clicks by 75%</li>
             <li>Consolidated four disconnected legacy systems into one cohesive platform</li>
+            <li>Aligned two independent teams on shared workflows and new standard operating procedures</li>
           </ul>
         </div>
       </div>
@@ -676,7 +727,6 @@
 
   <hr class="rule">
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="container">
       <p class="section-label reveal">About</p>
@@ -709,12 +759,9 @@
     </div>
   </section>
 
-  <!-- QUOTES -->
   <section id="quotes">
     <div class="container">
       <p class="section-label reveal" style="color:rgba(255,255,255,0.3)">Praise</p>
-
-      <!-- Featured -->
       <div class="quote-featured reveal">
         <span class="quote-mark">&ldquo;</span>
         <p class="quote-text">He consistently raises the standard of the work around him. Ron is very easy to work with — collaborative, reliable. A great asset to any design team.</p>
@@ -724,8 +771,6 @@
           Senior Colleague · Goldman Sachs
         </div>
       </div>
-
-      <!-- Supporting -->
       <div class="quotes-grid">
         <div class="quote-card reveal">
           <span class="quote-mark">&ldquo;</span>
@@ -760,7 +805,6 @@
 
   <hr class="rule">
 
-  <!-- IMPACT -->
   <section id="impact">
     <div class="container">
       <p class="section-label reveal">Impact Highlights</p>
@@ -813,7 +857,6 @@
 
   <hr class="rule">
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-inner">
@@ -829,7 +872,6 @@
     </div>
   </footer>
 
-  <!-- BOTTOM NAV (mobile) -->
   <nav id="bottom-nav" aria-label="Mobile navigation">
     <div class="bottom-nav-inner">
       <a href="#work" class="bottom-nav-item">
@@ -852,13 +894,11 @@
   </nav>
 
   <script>
-    // Top nav scroll border
     const topNav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       topNav.classList.toggle('scrolled', window.scrollY > 20);
     }, { passive: true });
 
-    // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -870,7 +910,6 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Force hero reveals immediately without waiting for scroll
     setTimeout(() => {
       document.querySelectorAll('#hero .reveal').forEach((el, i) => {
         setTimeout(() => el.classList.add('visible'), i * 120);
