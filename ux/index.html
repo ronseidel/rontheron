@@ -40,6 +40,8 @@
     v30 — 2026-04-07 — Spelled out One/Four for serif consistency, added 5-10x metric to CS1
     v31 — 2026-04-07 — Fixed mobile metric border: overrode nth-child(3n) desktop rule
     v32 — 2026-04-07 — Replaced 5-10x with "8 initiatives led", added toolkit bug bullet, fixed impact order, updated contracts language
+    v33 — 2026-04-07 — Added text-wrap: pretty (body, quotes) and balance (headlines, bio), added max-width to case-title
+    v34 — 2026-04-07 — Constrained nav content to match container on ultrawide screens
     ============================================================
     */
 
@@ -63,6 +65,7 @@
       color: var(--ink);
       font-size: 16px;
       line-height: 1.6;
+      text-wrap: pretty;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -73,7 +76,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px var(--pad);
+      padding: 20px max(var(--pad), calc((100% - var(--max)) / 2));
       background: rgba(249,249,249,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid transparent;
@@ -194,6 +197,7 @@
       color: var(--ink);
       max-width: 900px;
       margin-bottom: 52px;
+      text-wrap: balance;
     }
     .hero-headline em { font-style: italic; color: var(--accent); }
     .hero-actions { display: flex; gap: 20px; align-items: center; }
@@ -272,6 +276,7 @@
       letter-spacing: -0.01em;
       margin-bottom: 48px;
       max-width: 760px;
+      text-wrap: balance;
     }
 
     .metrics {
@@ -399,6 +404,7 @@
       font-weight: 300;
       line-height: 1.5;
       letter-spacing: -0.01em;
+      text-wrap: balance;
     }
     .about-bio strong { font-weight: 600; }
     .expertise-list { list-style: none; margin-bottom: 48px; }
@@ -478,6 +484,7 @@
       color: rgba(255,255,255,0.82);
       margin-bottom: 24px;
       flex: 1;
+      text-wrap: pretty;
     }
     .quote-attr {
       font-size: 11px;
