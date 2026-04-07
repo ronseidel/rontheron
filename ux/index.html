@@ -38,6 +38,7 @@
     v28 — 2026-04-07 — Restored "4 legacy systems" metric, dropped "2 teams united"
     v29 — 2026-04-07 — Fixed "1" metric to DM Sans, fixed mobile metric border bug
     v30 — 2026-04-07 — Spelled out One/Four for serif consistency, added 5-10x metric to CS1
+    v31 — 2026-04-07 — Fixed mobile metric border: overrode nth-child(3n) desktop rule
     ============================================================
     */
 
@@ -548,6 +549,7 @@
       #impact .impact-list li { grid-template-columns: 52px 1fr; gap: 16px; }
       .metrics { grid-template-columns: repeat(2, 1fr); }
       .metric,
+      .metric:nth-child(3n),
       .metric:nth-last-child(-n+3):nth-child(3n+1),
       .metric:nth-last-child(-n+3):nth-child(3n+1) ~ .metric { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
       .metric:nth-child(2n) { border-right: none; }
