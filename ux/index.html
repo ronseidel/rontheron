@@ -1,0 +1,862 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ron Seidel — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <style>
+    /*
+    ============================================================
+    PORTFOLIO — Ron Seidel · rontheron.com/ux
+    v01 — 2026-04-03 — Initial direction: editorial minimalism
+    v02–v17 — 2026-04-06 — Iterative refinements
+    v18 — 2026-04-06 — Full rewrite: fixed nav selector bug causing
+                        bottom-nav to inherit top:0 and become full-height overlay
+    ============================================================
+    */
+
+    :root {
+      --bg:     #F9F9F9;
+      --ink:    #0D0D0D;
+      --muted:  #777;
+      --border: #E2E2E2;
+      --accent: #00BB77;
+      --serif:  'Cormorant Garamond', Georgia, serif;
+      --sans:   'DM Sans', system-ui, sans-serif;
+      --max:    1100px;
+      --pad:    clamp(24px, 5vw, 80px);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TOP NAV (nav#nav only — not bottom-nav) ── */
+    nav#nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px var(--pad);
+      background: rgba(249,249,249,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav#nav.scrolled { border-bottom-color: var(--border); }
+
+    .nav-logo {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a.cta { color: var(--accent); font-weight: 500; }
+    .nav-links a.cta:hover { color: var(--ink); }
+
+    /* ── BOTTOM NAV (mobile only) ── */
+    nav#bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      top: auto;
+      z-index: 200;
+      background: rgba(249,249,249,0.97);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+    }
+    .bottom-nav-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px 0 14px;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .bottom-nav-item:hover { color: var(--ink); }
+    .bottom-nav-item svg { width: 20px; height: 20px; stroke-width: 1.75; }
+    .bottom-nav-label {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+    section { padding: 120px 0; }
+    hr.rule { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── FADE IN ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── HERO ── */
+    #hero {
+      padding-top: 200px;
+      padding-bottom: 140px;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .eyebrow-title { color: var(--ink); }
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(44px, 7vw, 96px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      max-width: 900px;
+      margin-bottom: 52px;
+    }
+    .hero-headline em { font-style: italic; color: var(--accent); }
+    .hero-actions { display: flex; gap: 20px; align-items: center; }
+    .btn {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 28px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      transition: background 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn:hover { background: var(--ink); color: var(--bg); }
+    .btn-ghost { border-color: var(--border); color: var(--muted); }
+    .btn-ghost:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 64px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── CASE STUDIES ── */
+    #work { padding-top: 80px; }
+    .case-study { margin-bottom: 120px; }
+    .case-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .case-index {
+      font-family: var(--serif);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .case-meta-text { display: flex; flex-direction: column; gap: 4px; }
+    .case-name {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .case-sub {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .case-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.5vw, 58px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 48px;
+      max-width: 760px;
+    }
+
+    /* Metrics */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .metric {
+      padding: 32px 28px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .metric:nth-child(3n) { border-right: none; }
+    .metric:nth-last-child(-n+3):nth-child(3n+1),
+    .metric:nth-last-child(-n+3):nth-child(3n+1) ~ .metric { border-bottom: none; }
+    .metric-value {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .metric-value .accent { color: var(--accent); }
+    .metric-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+    }
+    .metric-note {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-top: 6px;
+    }
+    .metrics-footnote {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      margin-bottom: 48px;
+      margin-top: 10px;
+    }
+
+    .case-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      padding-top: 8px;
+    }
+    .case-desc { font-size: 16px; line-height: 1.7; color: var(--ink); font-weight: 300; }
+    .case-bullets { list-style: none; }
+    .case-bullets li {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--muted);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+    .case-bullets li:first-child { border-top: 1px solid var(--border); }
+    .case-divider { border: none; border-top: 1px solid var(--border); margin-bottom: 80px; }
+
+    /* ── ABOUT ── */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-bio {
+      font-family: var(--serif);
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 300;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+    }
+    .about-bio strong { font-weight: 600; }
+    .expertise-list { list-style: none; margin-bottom: 48px; }
+    .expertise-list li {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .expertise-list li:first-child { border-top: 1px solid var(--border); }
+    .expertise-list strong { color: var(--ink); font-weight: 500; font-size: 14px; }
+    .contact-block { padding-top: 4px; }
+    .contact-block p { font-size: 13px; color: var(--muted); margin-bottom: 16px; font-weight: 300; }
+    .contact-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .contact-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+      transition: color 0.2s;
+    }
+    .contact-links a:hover { color: var(--accent); }
+
+    /* ── QUOTES ── */
+    #quotes { background: var(--ink); padding: 120px 0; }
+    #quotes .section-label { color: rgba(255,255,255,0.3); }
+    #quotes .section-label::after { background: rgba(255,255,255,0.1); }
+
+    .quote-featured {
+      padding: 56px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+    }
+    .quote-featured .quote-mark { font-size: 100px; }
+    .quote-featured .quote-text {
+      font-size: clamp(22px, 2.8vw, 32px);
+      color: rgba(255,255,255,0.9);
+    }
+    .quote-featured .quote-attr { color: rgba(255,255,255,0.4); }
+    .quote-featured .quote-attr strong { color: rgba(255,255,255,0.75); }
+
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+    .quote-card {
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+    }
+    .quote-mark {
+      font-family: var(--serif);
+      font-size: 56px;
+      line-height: 0.6;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 18px;
+      font-weight: 300;
+    }
+    .quote-text {
+      font-family: var(--serif);
+      font-size: clamp(16px, 1.8vw, 20px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 24px;
+      flex: 1;
+    }
+    .quote-attr {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.6;
+    }
+    .quote-attr strong {
+      display: block;
+      color: rgba(255,255,255,0.5);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    /* ── IMPACT ── */
+    #impact .impact-list { list-style: none; }
+    #impact .impact-list li {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 32px;
+      align-items: baseline;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    #impact .impact-list li:first-child { border-top: 1px solid var(--border); }
+    .impact-year { font-family: var(--serif); font-size: 15px; font-weight: 400; color: var(--muted); }
+    .impact-desc { font-size: 15px; font-weight: 400; color: var(--ink); line-height: 1.5; }
+    .impact-desc small { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; font-weight: 300; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 48px 0; }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-sig { font-family: var(--serif); font-size: 18px; font-weight: 300; font-style: italic; color: var(--ink); }
+    .footer-links { display: flex; gap: 28px; align-items: center; }
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--ink); }
+    .footer-copy { font-size: 12px; color: rgba(0,0,0,0.2); }
+
+    /* ── RESPONSIVE: TABLET ── */
+    @media (max-width: 768px) {
+      section { padding: 72px 0; }
+      #work { padding-top: 48px; }
+
+      /* hide top nav, show bottom nav */
+      nav#nav { display: none; }
+      nav#bottom-nav { display: block; }
+      body { padding-bottom: 72px; }
+
+      /* hero — no top nav, reduce padding */
+      #hero { padding-top: 80px; padding-bottom: 72px; min-height: 0; }
+      .hero-eyebrow { flex-wrap: wrap; }
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .hero-actions .btn { width: 100%; text-align: center; }
+
+      .case-body { grid-template-columns: 1fr; gap: 32px; }
+      #about .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .quotes-grid { grid-template-columns: 1fr; }
+      .quote-featured { padding: 32px; margin-bottom: 32px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+
+      #impact .impact-list li { grid-template-columns: 52px 1fr; gap: 16px; }
+
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .metric { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+      .metric:nth-child(3n) { border-right: 1px solid var(--border); }
+      .metric:nth-child(2n) { border-right: none; }
+      .metric:nth-last-child(-n+2) { border-bottom: none; }
+      /* ID-specific overrides (beat section{} specificity) */
+      #quotes { padding: 72px 0; }
+      .case-study { margin-bottom: 72px; }
+      .case-divider { margin-bottom: 48px; }
+      .section-label { margin-bottom: 40px; }
+    }
+
+    /* ── RESPONSIVE: MOBILE ── */
+    @media (max-width: 480px) {
+      #hero { padding-top: 60px; padding-bottom: 56px; }
+      .hero-headline { font-size: clamp(36px, 10vw, 56px); margin-bottom: 36px; }
+      .metric { padding: 20px 16px; }
+      .metric-value { font-size: clamp(28px, 7vw, 42px); }
+      .quote-card { padding: 28px 24px; }
+      .footer-links { flex-wrap: wrap; gap: 16px; }
+      .footer-copy { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav id="nav">
+    <a href="#hero" class="nav-logo">Ron<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#quotes">Praise</a></li>
+      <li><a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank" class="cta">Resume</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <p class="hero-eyebrow reveal"><span class="eyebrow-title">Product Designer</span>&ensp;·&ensp;13+ Years&ensp;·&ensp;NYC / NJ / Remote</p>
+      <h1 class="hero-headline reveal" style="transition-delay:0.1s">
+        I make data-rich systems<br>feel <em>simple</em> and predictable.
+      </h1>
+      <div class="hero-actions reveal" style="transition-delay:0.2s">
+        <a href="#work" class="btn">Work</a>
+        <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank" class="btn btn-ghost">Download Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="container">
+      <p class="section-label reveal">Selected Work</p>
+
+      <!-- Case Study 1 -->
+      <div class="case-study reveal">
+        <div class="case-meta">
+          <span class="case-index">01</span>
+          <div class="case-meta-text">
+            <span class="case-name">Advisor Platform</span>
+            <span class="case-sub">Global Investment Bank · 2023 – Present</span>
+          </div>
+        </div>
+        <h2 class="case-title">Designing the platform wealth advisors use to move billions.</h2>
+        <div class="metrics">
+          <div class="metric">
+            <div class="metric-value">95<span class="accent">%+</span></div>
+            <div class="metric-label">Accounts opened digitally</div>
+            <div class="metric-note">Up from &lt;50%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">10<span class="accent">K+</span></div>
+            <div class="metric-label">Manual emails eliminated</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">200<span class="accent">%+</span></div>
+            <div class="metric-label">Prospecting tool usage</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">25<span class="accent">%+</span></div>
+            <div class="metric-label">Reduction in dev time</div>
+            <div class="metric-note">Projected</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">3<span class="accent">min</span></div>
+            <div class="metric-label">Saved per account action</div>
+            <div class="metric-note">Projected</div>
+          </div>
+        </div>
+        <p class="metrics-footnote">Metrics reflect a mix of internal reporting and directional stakeholder estimates.</p>
+        <div class="case-body">
+          <p class="case-desc">
+            Primary designer for three new products and a year-defining initiative at a top-tier global investment bank, embedded through Publicis Sapient. Partnered with two engineering squads and multiple product managers across prospecting, onboarding, and account management.
+          </p>
+          <ul class="case-bullets">
+            <li>Led 2025's flagship initiative, eliminating ~11K manual emails with a fully digital selection flow</li>
+            <li>Built standardized layouts and interaction patterns, projected to cut dev time by 25%+</li>
+            <li>Increased digital account openings from under 50% to over 95%</li>
+            <li>Received an internal Visual Design Award for creativity and craft</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="case-divider">
+
+      <!-- Case Study 2 -->
+      <div class="case-study reveal">
+        <div class="case-meta">
+          <span class="case-index">02</span>
+          <div class="case-meta-text">
+            <span class="case-name">Funds of Funds System</span>
+            <span class="case-sub">Asset Manager · 2022 – 2023</span>
+          </div>
+        </div>
+        <h2 class="case-title">Unifying four fragmented systems into one — managing tens of billions daily.</h2>
+        <div class="metrics">
+          <div class="metric">
+            <div class="metric-value">75<span class="accent">%</span></div>
+            <div class="metric-label">Fewer clicks for common tasks</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">1.5<span class="accent">hr</span></div>
+            <div class="metric-label">Saved per fund creation</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">99<span class="accent">%+</span></div>
+            <div class="metric-label">Reduction in data entry errors</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">90<span class="accent">%</span></div>
+            <div class="metric-label">Time saved on rebalancing</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value accent" style="font-size:42px;line-height:1.1;">1</div>
+            <div class="metric-label">Catastrophic error averted</div>
+          </div>
+        </div>
+        <p class="metrics-footnote">Sourced from stakeholder estimates.</p>
+        <div class="case-body">
+          <p class="case-desc">
+            Led end-to-end experience strategy and complex workflow redesign for an internal funds management system at a major asset manager. Four legacy systems, hundreds of clicks per task, and high risk of costly errors — redesigned into a single, coherent platform.
+          </p>
+          <ul class="case-bullets">
+            <li>Identified a missing maker-checker control that would have allowed unilateral movement of billions without oversight</li>
+            <li>Introduced a novel approval pattern improving operational confidence and auditability</li>
+            <li>Reduced fund creation time by 1.5 hours and common task clicks by 75%</li>
+            <li>Consolidated four disconnected legacy systems into one cohesive platform</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label reveal">About</p>
+      <div class="about-grid reveal">
+        <div>
+          <p class="about-bio">
+            For 13+ years I've designed <strong>regulated, high-stakes platforms</strong> across finance, cybersecurity, logistics, healthcare, and government. Currently embedded at a top-tier investment bank through Publicis Sapient.
+          </p>
+        </div>
+        <div class="about-right">
+          <ul class="expertise-list">
+            <li><strong>Complex Systems & Data-Rich Interfaces</strong></li>
+            <li><strong>Design Systems</strong> <span>Figma, Framer, Webflow</span></li>
+            <li><strong>Workflow & Interaction Design</strong></li>
+            <li><strong>AI-Driven Product Design</strong></li>
+            <li><strong>Cross-Disciplinary Collaboration</strong></li>
+            <li><strong>Dev-Ready Handoff</strong> <span>HTML, CSS, JS</span></li>
+            <li><strong>Accessibility & Usability Research</strong></li>
+          </ul>
+          <div class="contact-block">
+            <p>Available for roles in NYC/NJ or remote. Contracts welcome.</p>
+            <div class="contact-links">
+              <a href="mailto:hello@ronseidel.com">hello@ronseidel.com</a>
+              <a href="https://linkedin.com/in/ronseidel" target="_blank">LinkedIn</a>
+              <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTES -->
+  <section id="quotes">
+    <div class="container">
+      <p class="section-label reveal" style="color:rgba(255,255,255,0.3)">Praise</p>
+
+      <!-- Featured -->
+      <div class="quote-featured reveal">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">He consistently raises the standard of the work around him. Ron is very easy to work with — collaborative, reliable. A great asset to any design team.</p>
+        <div class="quote-attr">
+          <strong>Geoff Biskupek</strong>
+          Principal UI Designer & Design Systems Lead<br>
+          Senior Colleague · Goldman Sachs
+        </div>
+      </div>
+
+      <!-- Supporting -->
+      <div class="quotes-grid">
+        <div class="quote-card reveal">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">Ron operates above the ordinary in creating the most stylistic and functional user interfaces… He reimagined functionalities and proposed notable improvements to the activity flow.</p>
+          <div class="quote-attr">
+            <strong>Sam Ekunseitan</strong>
+            VP, Global IT Leader<br>
+            Ron's Client · Fidelity
+          </div>
+        </div>
+        <div class="quote-card reveal" style="transition-delay:0.1s">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">He's a consistent top performer in everything UX… super productive with a great eye and an intellect that breaks IQ tests. Ron's curious, creative, a natural problem-solver, and a great team player.</p>
+          <div class="quote-attr">
+            <strong>John Consigli</strong>
+            UX Design & Research Leader<br>
+            Ron's Direct Manager · Prudential
+          </div>
+        </div>
+        <div class="quote-card reveal" style="transition-delay:0.15s">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">Ron will challenge ideas or opinions that he knows won't work and is able to explain the whys. He is genuinely a super nice guy and a pleasure to work with.</p>
+          <div class="quote-attr">
+            <strong>Judith Shea</strong>
+            Head of Design<br>
+            Managed Ron · Prudential
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- IMPACT -->
+  <section id="impact">
+    <div class="container">
+      <p class="section-label reveal">Impact Highlights</p>
+      <ul class="impact-list reveal">
+        <li>
+          <span class="impact-year">2025</span>
+          <span class="impact-desc">Asset Management Visual Design Award
+            <small>Recognized for excellence in creativity, visual communication, and design craft</small>
+          </span>
+        </li>
+        <li>
+          <span class="impact-year">2022–23</span>
+          <span class="impact-desc">Enterprise Product Suite Vision — SecureLink × Imprivata
+            <small>Vision prototypes contributed to the acquisition of SecureLink by Imprivata</small>
+          </span>
+        </li>
+        <li>
+          <span class="impact-year">2022</span>
+          <span class="impact-desc">Scalable Data Interaction Patterns — Planview
+            <small>Defined reusable filtering and navigation models for widely used enterprise software</small>
+          </span>
+        </li>
+        <li>
+          <span class="impact-year">2023</span>
+          <span class="impact-desc">AI-Assisted Document Redaction — Government Case Management
+            <small>Prototyped OCR-driven workflows for government agency software</small>
+          </span>
+        </li>
+        <li>
+          <span class="impact-year">2018</span>
+          <span class="impact-desc">Retained a world-class healthcare institution — Prudential
+            <small>A high-fidelity prototype secured a client representing hundreds of millions in AUM</small>
+          </span>
+        </li>
+        <li>
+          <span class="impact-year">2017–21</span>
+          <span class="impact-desc">Prudential Impact Awards × 6
+            <small>Recognized for driving meaningful product, user, and business outcomes across group insurance, disability benefits, and retirement services</small>
+          </span>
+        </li>
+        <li>
+          <span class="impact-year">2014–17</span>
+          <span class="impact-desc">Real-Time Operational & Reporting Systems — DMW&H
+            <small>Designed systems enabling decision-making across 25 distribution center implementations nationwide</small>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-sig">Ron M. Seidel</span>
+        <div class="footer-links">
+          <a href="mailto:hello@ronseidel.com">Email</a>
+          <a href="https://linkedin.com/in/ronseidel" target="_blank">LinkedIn</a>
+          <a href="https://rontheron.com">rontheron.com</a>
+          <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
+        </div>
+        <span class="footer-copy">South Orange, NJ · 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTTOM NAV (mobile) -->
+  <nav id="bottom-nav" aria-label="Mobile navigation">
+    <div class="bottom-nav-inner">
+      <a href="#work" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M15.6 2.7a10 10 0 1 0 5.7 5.7"/><circle cx="12" cy="12" r="2"/><path d="M13.4 10.6 19 5"/></svg>
+        <span class="bottom-nav-label">Work</span>
+      </a>
+      <a href="#about" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></svg>
+        <span class="bottom-nav-label">About</span>
+      </a>
+      <a href="#quotes" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14a2 2 0 0 0 2-2V8h-2"/><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M8 14a2 2 0 0 0 2-2V8H8"/></svg>
+        <span class="bottom-nav-label">Praise</span>
+      </a>
+      <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M16 22a4 4 0 0 0-8 0"/><circle cx="12" cy="15" r="3"/></svg>
+        <span class="bottom-nav-label">Resume</span>
+      </a>
+    </div>
+  </nav>
+
+  <script>
+    // Top nav scroll border
+    const topNav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      topNav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -32px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Force hero reveals immediately without waiting for scroll
+    setTimeout(() => {
+      document.querySelectorAll('#hero .reveal').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 120);
+      });
+    }, 100);
+  </script>
+</body>
+</html>
