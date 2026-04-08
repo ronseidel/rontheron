@@ -38,6 +38,7 @@
                            add #music mobile padding override
     v12     — 2026-04-07 — Constrained nav content on ultrawide; added text-wrap: pretty/balance
     v13     — 2026-04-07 — Restored Google Fonts link (Syne, Lora, Alegreya SC) lost in Chrome save
+    v14     — 2026-04-08 — Stripped Grammarly artifacts, fixed mangled track-click JS, added favicon + visible version
     ============================================================
     */
 
@@ -610,6 +611,12 @@
       color: rgba(242,240,235,0.15);
       letter-spacing: 0.04em;
     }
+    .footer-version {
+      font-family: var(--sans);
+      font-size: 10px;
+      color: rgba(242,240,235,0.08);
+      letter-spacing: 0.05em;
+    }
 
     /* ── PLAYER ── */
     .track { cursor: pointer; }
@@ -896,8 +903,11 @@
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
   </style>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
-<body cz-shortcut-listen="true" data-new-gr-c-s-check-loaded="14.1280.0" data-gr-ext-installed="">
+<body>
 
   <!-- NAV -->
   <nav id="nav">
@@ -1193,12 +1203,13 @@
       <div class="footer-inner">
         <span class="footer-name">Ron the Ron — Ron Seidel</span>
         <div class="footer-links">
-          <a href="mailto:hello@ronseidel.com">Email</a>
+          <a href="/cdn-cgi/l/email-protection#cfa7aaa3a3a08fbda0a1bcaaa6abaaa3e1aca0a2">Email</a>
           <a href="https://linkedin.com/in/ronseidel" target="_blank">LinkedIn</a>
           <a href="https://rontheronmusic.bandcamp.com/" target="_blank">Bandcamp</a>
           <a href="https://rontheron.com/ux">Design Work</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
+        <span class="footer-version">v14</span>
       </div>
     </div>
   </footer>
@@ -1244,7 +1255,7 @@
     <span class="mp-yt-note">Four Messages · 2025</span>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // ── Track data ──
     const BASE = 'https://ronseidel.github.io/assets/audio/four-messages/mp3s/';
     const tracks = [
@@ -1308,11 +1319,8 @@
     // ── Track row click ──
     document.querySelectorAll('.track').forEach((el, i) => {
       el.addEventListener('click', (e) => {
-        if (e.target.classList.contains('track-stems')) return;
-        if (currentIdx === i && isPlaying) {
-          audio.pause();
-        } else if (currentIdx === i && !isPlaying) {
-          audio.play();
+        if (e.target.closest('a')) return;
+        if (currentIdx === i) { isPlaying ? audio.pause() : audio.play();
         } else {
           loadTrack(i);
         }
@@ -1376,24 +1384,5 @@
     }, 80);
   </script>
 
-</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
-      div.grammarly-desktop-integration {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select:none;
-        user-select:none;
-      }
-
-      div.grammarly-desktop-integration:before {
-        content: attr(data-content);
-      }
-    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
+</body>
+</html>
