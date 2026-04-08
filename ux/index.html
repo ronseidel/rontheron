@@ -42,6 +42,8 @@
     v32 — 2026-04-07 — Replaced 5-10x with "8 initiatives led", added toolkit bug bullet, fixed impact order, updated contracts language
     v33 — 2026-04-07 — Added text-wrap: pretty (body, quotes) and balance (headlines, bio), added max-width to case-title
     v34 — 2026-04-07 — Constrained nav content to match container on ultrawide screens
+    v35 — 2026-04-08 — Mobile eyebrow: stacked vertically, dots hidden, green line aligned to top
+    v36 — 2026-04-08 — Added favicon (SVG, ICO, apple-touch-icon)
     ============================================================
     */
 
@@ -536,6 +538,7 @@
     }
     .footer-links a:hover { color: var(--ink); }
     .footer-copy { font-size: 12px; color: rgba(0,0,0,0.2); }
+    .footer-version { font-size: 10px; color: rgba(0,0,0,0.1); letter-spacing: 0.05em; }
 
     @media (max-width: 768px) {
       section { padding: 72px 0; }
@@ -545,7 +548,10 @@
       nav#bottom-nav { display: block; }
       body { padding-bottom: 72px; }
       #hero { padding-top: 100px; padding-bottom: 72px; min-height: 0; }
-      .hero-eyebrow { flex-wrap: wrap; }
+      .hero-eyebrow { align-items: flex-start; }
+      .hero-eyebrow::before { margin-top: 7px; }
+      .hero-eyebrow .eyebrow-items { display: flex; flex-direction: column; gap: 3px; }
+      .hero-eyebrow .eyebrow-sep { display: none; }
       .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
       .hero-actions .btn { width: 100%; text-align: center; }
       .case-body { grid-template-columns: 1fr; gap: 32px; }
@@ -578,6 +584,9 @@
       .footer-copy { display: none; }
     }
   </style>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
 
@@ -593,7 +602,7 @@
 
   <section id="hero">
     <div class="container">
-      <p class="hero-eyebrow reveal"><span class="eyebrow-title">Product Designer</span>&ensp;·&ensp;13+ Years&ensp;·&ensp;NYC / NJ / Remote</p>
+      <p class="hero-eyebrow reveal"><span class="eyebrow-items"><span class="eyebrow-title">Product Designer</span><span class="eyebrow-sep">&ensp;·&ensp;</span><span>13+ Years</span><span class="eyebrow-sep">&ensp;·&ensp;</span><span>NYC / NJ / Remote</span></span></p>
       <h1 class="hero-headline reveal" style="transition-delay:0.1s">
         I make data-rich systems<br>feel <em>simple</em> and predictable.
       </h1>
@@ -759,7 +768,7 @@
           <div class="contact-block">
             <p>Available for roles in NYC/NJ or remote. Open to full-time and contract.</p>
             <div class="contact-links">
-              <a href="mailto:hello@ronseidel.com">hello@ronseidel.com</a>
+              <a href="/cdn-cgi/l/email-protection#6109040d0d0e21130e0f12040805040d4f020e0c"><span class="__cf_email__" data-cfemail="157d7079797a55677a7b66707c7170793b767a78">[email&#160;protected]</span></a>
               <a href="https://linkedin.com/in/ronseidel" target="_blank">LinkedIn</a>
               <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
             </div>
@@ -851,8 +860,7 @@
         </li>
         <li>
           <span class="impact-year">2017–21</span>
-          <span class="impact-desc">Prudential Impact Awards × 6
-            <small>Recognized for driving meaningful product, user, and business outcomes across group insurance, disability benefits, and retirement services</small>
+          <span class="impact-desc">Prudnce, disability benefits, and retirement services</small>
           </span>
         </li>
         <li>
@@ -878,6 +886,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
+        <span class="footer-version">v36</span>
       </div>
     </div>
   </footer>
