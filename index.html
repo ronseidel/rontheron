@@ -39,6 +39,7 @@
     v12     — 2026-04-07 — Constrained nav content on ultrawide; added text-wrap: pretty/balance
     v13     — 2026-04-07 — Restored Google Fonts link (Syne, Lora, Alegreya SC) lost in Chrome save
     v14     — 2026-04-08 — Stripped Grammarly artifacts, fixed mangled track-click JS, added favicon + visible version
+    v15     — 2026-04-08 — Replaced Cloudflare email obfuscation with plain mailto, stripped CF script
     ============================================================
     */
 
@@ -903,9 +904,9 @@
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
   </style>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="favicon.ico" sizes="32x32">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body>
 
@@ -1203,13 +1204,13 @@
       <div class="footer-inner">
         <span class="footer-name">Ron the Ron — Ron Seidel</span>
         <div class="footer-links">
-          <a href="/cdn-cgi/l/email-protection#cfa7aaa3a3a08fbda0a1bcaaa6abaaa3e1aca0a2">Email</a>
+          <a href="mailto:hello@ronseidel.com">Email</a>
           <a href="https://linkedin.com/in/ronseidel" target="_blank">LinkedIn</a>
           <a href="https://rontheronmusic.bandcamp.com/" target="_blank">Bandcamp</a>
           <a href="https://rontheron.com/ux">Design Work</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v14</span>
+        <span class="footer-version">v15</span>
       </div>
     </div>
   </footer>
@@ -1255,7 +1256,7 @@
     <span class="mp-yt-note">Four Messages · 2025</span>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // ── Track data ──
     const BASE = 'https://ronseidel.github.io/assets/audio/four-messages/mp3s/';
     const tracks = [
