@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Smell — Ron Seidel</title>
 <meta name="description" content="A photo essay about brand identity, fatherhood, immigration, soccer, and music — anchored by a pair of Adidas Sambas and a baby named Margot.">
 <meta name="author" content="Ron Seidel">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="theme-color" content="#000" id="themeColor">
 <meta name="color-scheme" content="dark">
 
 <!-- Open Graph -->
@@ -34,28 +34,69 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0a;
-    --text: #d4d0c8;
-    --accent: #e8e4db;
-    --dim: #6b6660;
+    --bg: #000;
+    --text: #d8d4cc;
+    --accent: #ebe8e0;
+    --dim: #7a756e;
     --stripe: #c8c0b4;
+    --player-bg: rgba(10,10,10,0.95);
+    --border: rgba(200,192,180,0.12);
+    color-scheme: dark;
   }
+  html[data-theme="light"],
+  html[data-theme="light"] body {
+    --bg: #f7f5f2;
+    --text: #2c2926;
+    --accent: #1a1816;
+    --dim: #8a857e;
+    --stripe: #8a857e;
+    --player-bg: rgba(247,245,242,0.95);
+    --border: rgba(44,41,38,0.1);
+    color-scheme: light;
+    background: #f7f5f2;
+    color: #2c2926;
+  }
+  /* Listen button stays dark-pilled over the image for contrast in both themes */
+  html[data-theme="light"] .listen-trigger {
+    background: rgba(18,18,18,0.85); color: #ebe8e0;
+    border-color: rgba(200,192,180,0.15);
+  }
+  /* Explicit light overrides for key elements */
+  html[data-theme="light"] .essay p { color: #2c2926; }
+  html[data-theme="light"] .essay p.opening { color: #1a1816; }
+  html[data-theme="light"] .essay p.opening::first-letter { color: #1a1816; }
+  html[data-theme="light"] .essay em { color: #1a1816; }
+  html[data-theme="light"] .pull p { color: #1a1816; }
+  html[data-theme="light"] .break span { background: #8a857e; }
+  html[data-theme="light"] .essay-footer p { color: #8a857e; }
+  html[data-theme="light"] .audio-player {
+    background: rgba(247,245,242,0.95);
+    border-top-color: rgba(44,41,38,0.1);
+  }
+  html[data-theme="light"] .audio-title { color: #1a1816; }
+  html[data-theme="light"] .audio-time { color: #8a857e; }
+  html[data-theme="light"] .audio-btn { color: #1a1816; }
+  html[data-theme="light"] .audio-btn.play-btn { background: #1a1816; color: #f7f5f2; }
+  html[data-theme="light"] .audio-progress { background: rgba(44,41,38,0.08); }
+  html[data-theme="light"] .audio-progress-fill { background: #8a857e; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; background: var(--bg); }
   body {
     font-family: 'EB Garamond', Georgia, serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.75;
-    font-size: 19px;
+    line-height: 1.8;
+    font-size: 20px;
+    letter-spacing: 0.005em;
+    font-feature-settings: 'kern' 1, 'liga' 1;
     -webkit-font-smoothing: antialiased;
     padding-bottom: 90px;
   }
   .audio-player {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(18,18,18,0.95);
+    background: var(--player-bg);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(200,192,180,0.1);
+    border-top: 1px solid var(--border);
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -93,6 +134,12 @@
   .audio-btn.play-btn:hover { background: #fff; }
   .audio-btn svg { width: 18px; height: 18px; fill: currentColor; }
   .audio-btn.play-btn svg { width: 22px; height: 22px; }
+  .audio-btn.speed-btn {
+    width: auto; min-width: 44px; padding: 8px 10px; border-radius: 14px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem;
+    letter-spacing: 0.06em; font-variant-numeric: tabular-nums;
+  }
+  html[data-theme="light"] .audio-btn.speed-btn { color: #1a1816; }
   .audio-info { flex: 1; min-width: 0; }
   .audio-title {
     font-family: 'Bebas Neue', sans-serif; font-size: 0.8rem;
@@ -121,7 +168,7 @@
   [data-read].speaking { color: var(--accent) !important; }
   .hero {
     height: 100vh; display: flex; flex-direction: column;
-    justify-content: flex-end; padding: 0 0 8vh 0;
+    justify-content: flex-end; padding: 0 0 16vh 0;
     position: relative; overflow: hidden;
   }
   .hero-image { position: absolute; inset: 0; z-index: 0; }
@@ -129,6 +176,7 @@
     width: 100%; height: 100%; object-fit: cover;
     object-position: center 30%; opacity: 0.55;
   }
+  html[data-theme="light"] .hero-image img { opacity: 0.85; }
   .hero-image::after {
     content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60%;
     background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
@@ -138,6 +186,7 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(4rem, 12vw, 10rem); color: var(--accent);
     letter-spacing: 0.04em; line-height: 0.9; margin-bottom: 0.15em;
+    text-wrap: balance;
   }
   .hero .byline {
     font-family: 'EB Garamond', serif; font-size: 1.1rem;
@@ -149,7 +198,7 @@
     background: var(--stripe); opacity: 0.4;
   }
   .essay { max-width: 680px; margin: 0 auto; padding: 6rem 2rem 4rem; }
-  .essay p { margin-bottom: 1.6em; }
+  .essay p { margin-bottom: 1.6em; text-wrap: pretty; }
   .essay p.opening { font-size: 1.35rem; line-height: 1.65; color: var(--accent); }
   .essay p.opening::first-letter {
     font-family: 'Bebas Neue', sans-serif; font-size: 4.5rem;
@@ -171,11 +220,12 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(1.8rem, 4vw, 3rem); color: var(--accent);
     letter-spacing: 0.03em; line-height: 1.2;
+    text-wrap: balance;
   }
   .essay-footer {
     max-width: 680px; margin: 6rem auto 0;
     padding: 3rem 2rem 6rem;
-    border-top: 1px solid rgba(200,192,180,0.15); text-align: center;
+    border-top: 1px solid var(--border); text-align: center;
   }
   .essay-footer p { font-size: 0.9rem; color: var(--dim); font-style: italic; line-height: 1.7; }
   .fade-in {
@@ -183,20 +233,45 @@
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .theme-toggle {
+    position: fixed; top: 20px; left: 20px; z-index: 99;
+    background: rgba(18,18,18,0.85); backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(200,192,180,0.15); color: var(--accent);
+    width: 40px; height: 40px; border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  html[data-theme="light"] .theme-toggle {
+    background: rgba(247,245,242,0.85); border-color: rgba(44,41,38,0.1);
+    color: #2c2926;
+  }
+  .theme-toggle:hover { transform: scale(1.08); }
+  .theme-toggle svg { width: 18px; height: 18px; fill: currentColor; }
+  body, .audio-player, .listen-trigger, .essay-footer {
+    transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  }
   @media (max-width: 640px) {
-    body { font-size: 17px; }
+    body { font-size: 18px; }
     .essay { padding: 4rem 1.5rem 3rem; }
     .photo-pair { grid-template-columns: 1fr; gap: 2px; }
     .photo-pair img { height: 50vh; }
     .pull { padding: 0 2rem; }
     .audio-inner { padding: 8px 16px 10px; gap: 10px; }
     .listen-trigger { top: 12px; right: 12px; font-size: 0.78rem; padding: 8px 14px; }
+    .theme-toggle { top: 12px; left: 12px; width: 36px; height: 36px; }
   }
 </style>
 </head>
 <body>
 
 <audio id="narrator" preload="auto" src="the-smell-20260415-01.mp3"></audio>
+
+<!-- Theme toggle -->
+<button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode" onclick="toggleTheme()">
+  <svg id="moonIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+  <svg id="sunIcon" viewBox="0 0 24 24" style="display:none"><path d="M12 18a6 6 0 110-12 6 6 0 010 12zm0-2a4 4 0 100-8 4 4 0 000 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></svg>
+</button>
 
 <button class="listen-trigger" id="listenBtn" onclick="showPlayer()">
   <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
@@ -222,6 +297,7 @@
       <button class="audio-btn" onclick="skip(15)" title="Forward 15s">
         <svg viewBox="0 0 24 24"><path d="M12.01 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="14" y="15.5" font-size="7" fill="currentColor" text-anchor="middle" font-family="sans-serif" font-weight="bold">15</text></svg>
       </button>
+      <button class="audio-btn speed-btn" id="speedBtn" onclick="cycleSpeed()" title="Playback speed">1&times;</button>
     </div>
     <div class="audio-info">
       <div class="audio-title">THE SMELL — RON SEIDEL</div>
@@ -237,7 +313,7 @@
   <div class="hero-content">
     <div class="three-stripes"><span></span><span></span><span></span></div>
     <h1>The Smell</h1>
-    <p class="byline">Words, photographs &amp; narration by Ron Seidel</p>
+    <p class="byline">Words, photographs, narration &amp; music by Ron Seidel</p>
   </div>
 </header>
 
@@ -395,10 +471,31 @@
 <footer class="essay-footer">
   <div class="three-stripes" style="justify-content:center; margin-bottom:1.5rem;"><span></span><span></span><span></span></div>
   <p>South Orange, New Jersey<br>2026</p>
-  <p style="margin-top:0.8rem;">Words, photographs &amp; narration by Ron Seidel</p>
+  <p style="margin-top:0.8rem;">Words, photographs, narration &amp; music by Ron Seidel</p>
 </footer>
 
 <script>
+/* CHANGELOG
+   20260417-03: always defaults to dark on load (no more localStorage restore);
+                toggle still works per-session but doesn't persist across reloads;
+                explicit data-theme="dark" on html element for belt-and-suspenders.
+   20260417-02: hero actually switches to light mode now (removed forced-dark overrides);
+                fade reverted to var(--bg) so it matches active theme;
+                image opacity bumped to 0.85 in light mode (0.55 was too washed on cream).
+   20260417-01: light-mode fade now uses #000 (matches hero bg, no cream wash);
+                hero bottom padding 8vh → 16vh (clearance for audio player);
+                added speed chooser (0.75× / 1× / 1.25× / 1.5×).
+*/
+// Theme toggle — always defaults to dark on load; toggle works per-session, no persistence
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') !== 'light';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('moonIcon').style.display = isDark ? 'none' : '';
+  document.getElementById('sunIcon').style.display = isDark ? '' : 'none';
+  document.getElementById('themeColor').content = isDark ? '#f7f5f2' : '#000';
+}
+
 const audio = document.getElementById('narrator');
 const progressBar = document.getElementById('progressBar');
 const progressFill = document.getElementById('progressFill');
@@ -445,6 +542,16 @@ function restart() {
 
 function skip(seconds) {
   audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+}
+
+const speeds = [0.75, 1, 1.25, 1.5];
+let speedIdx = 1;
+function cycleSpeed() {
+  speedIdx = (speedIdx + 1) % speeds.length;
+  const rate = speeds[speedIdx];
+  audio.playbackRate = rate;
+  const label = rate === 1 ? '1&times;' : rate + '&times;';
+  document.getElementById('speedBtn').innerHTML = label;
 }
 
 progressBar.addEventListener('click', (e) => {
