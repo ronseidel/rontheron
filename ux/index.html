@@ -109,6 +109,7 @@
     v70 — 2026-06-01 — Mobile hero: centered eyebrow + industry strip; buttons stay side-by-side down to 600px then stack full-width (section labels + metrics left as-is)
     v71 — 2026-06-01 — Hero button "Download Resume" -> "Resume"; section labels centered between two hairlines; metrics + footnote centered within centered case studies
     v72 — 2026-06-01 — Scoped centered section-label to #work only (matches centered case studies); ABOUT/PRAISE/IMPACT back to left-aligned over their left content
+    v73 — 2026-06-01 — Mobile polish: hero buttons side-by-side (equal width); industry strip split into two groups so it wraps cleanly with no orphan bullet; case-study body centered on mobile; featured quote fills full container width (matches supporting quotes); all metric labels forced to two lines for uniformity; impact year ranges (2017–21) no longer wrap
     ============================================================
     */
 
@@ -268,6 +269,7 @@
       margin-bottom: 40px;
     }
     .hero-industries .sep { color: var(--accent); margin: 0 6px; }
+    .hero-industries .ind-group { display: inline; }
     .hero-actions { display: flex; gap: 20px; align-items: center; }
     .btn {
       font-family: var(--body);
@@ -377,6 +379,7 @@
       color: var(--muted);
       line-height: 1.45;
       letter-spacing: 0;
+      min-height: 2.9em;
     }
     .metric-note {
       font-size: 10px;
@@ -523,7 +526,7 @@
       border: none;
       background: none;
       margin-bottom: 64px;
-      max-width: 1000px;
+      max-width: none;
       display: flex;
       flex-direction: column;
     }
@@ -601,7 +604,7 @@
       border-bottom: 1px solid var(--border);
     }
     #impact .impact-list li:first-child { border-top: 1px solid var(--border); }
-    .impact-year { font-family: var(--body); font-size: 15px; font-weight: 400; color: var(--muted); }
+    .impact-year { font-family: var(--body); font-size: 15px; font-weight: 400; color: var(--muted); white-space: nowrap; }
     .impact-desc { font-size: 15px; font-weight: 400; color: var(--ink); line-height: 1.5; }
     .impact-desc small { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; font-weight: 400; }
 
@@ -641,14 +644,17 @@
       .hero-eyebrow .eyebrow-items { display: flex; flex-direction: column; align-items: center; gap: 3px; }
       .hero-eyebrow .eyebrow-sep { display: none; }
       .hero-industries { text-align: center; }
+      .hero-industries .ind-group { display: block; white-space: nowrap; }
+      .hero-industries .sep-fold { display: none; }
       .hero-actions { justify-content: center; gap: 12px; }
-      .case-body { grid-template-columns: 1fr; gap: 32px; }
+      .hero-actions .btn { flex: 1; text-align: center; }
+      .case-body { grid-template-columns: 1fr; gap: 32px; text-align: center; }
       .case-images { grid-template-columns: 1fr; gap: 16px; }
       #about .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .quote-card { grid-template-columns: 1fr; grid-template-areas: "text" "attr"; gap: 20px; padding: 32px 0; }
       .quote-featured { padding: 32px; margin-bottom: 32px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
-      #impact .impact-list li { grid-template-columns: 52px 1fr; gap: 16px; }
+      #impact .impact-list li { grid-template-columns: 64px 1fr; gap: 16px; }
       .metrics { grid-template-columns: repeat(2, 1fr); }
       .metric { padding: 28px 24px 28px 0; border-bottom: none; }
       .metric:nth-child(-n+4) { border-bottom: 1px solid var(--border); }
@@ -656,11 +662,6 @@
       .case-study { margin-bottom: 72px; }
       .case-divider { margin-bottom: 48px; }
       .section-label { margin-bottom: 40px; }
-    }
-
-    @media (max-width: 600px) {
-      .hero-actions { flex-direction: column; align-items: stretch; }
-      .hero-actions .btn { width: 100%; text-align: center; }
     }
 
     @media (max-width: 480px) {
@@ -695,7 +696,7 @@
       <h1 class="hero-headline reveal" style="transition-delay:0.1s">
         Software that feels like <em>butter</em>
       </h1>
-      <p class="hero-industries reveal" style="transition-delay:0.15s">Finance <span class="sep">•</span> Logistics <span class="sep">•</span> Cybersecurity <span class="sep">•</span> Healthcare <span class="sep">•</span> Gov't</p>
+      <p class="hero-industries reveal" style="transition-delay:0.15s"><span class="ind-group">Finance <span class="sep">•</span> Logistics <span class="sep">•</span> Cybersecurity</span> <span class="sep sep-fold">•</span> <span class="ind-group">Healthcare <span class="sep">•</span> Gov't</span></p>
       <div class="hero-actions reveal" style="transition-delay:0.2s">
         <a href="#work" class="btn">Work</a>
         <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank" class="btn btn-ghost">Resume</a>
@@ -731,30 +732,30 @@
         <div class="metrics">
           <div class="metric">
             <div class="metric-value">95<span class="accent">%+</span></div>
-            <div class="metric-label">Accounts opened digitally</div>
+            <div class="metric-label">Accounts opened<br>digitally</div>
             <div class="metric-note">Up from &lt;50%</div>
           </div>
           <div class="metric">
             <div class="metric-value">10<span class="accent">K+</span></div>
-            <div class="metric-label">Manual emails eliminated</div>
+            <div class="metric-label">Manual emails<br>eliminated</div>
           </div>
           <div class="metric">
             <div class="metric-value">200<span class="accent">%+</span></div>
-            <div class="metric-label">Prospecting tool usage</div>
+            <div class="metric-label">Prospecting<br>tool usage</div>
           </div>
           <div class="metric">
             <div class="metric-value">25<span class="accent">%+</span></div>
-            <div class="metric-label">Reduction in dev time</div>
+            <div class="metric-label">Reduction in<br>dev time</div>
             <div class="metric-note">Projected</div>
           </div>
           <div class="metric">
             <div class="metric-value">3<span class="accent">min</span></div>
-            <div class="metric-label">Saved per account action</div>
+            <div class="metric-label">Saved per<br>account action</div>
             <div class="metric-note">Projected</div>
           </div>
           <div class="metric">
             <div class="metric-value">5</div>
-            <div class="metric-label">Initiatives led as primary designer</div>
+            <div class="metric-label">Initiatives led as<br>primary designer</div>
           </div>
         </div>
         <p class="metrics-footnote">Metrics reflect a mix of internal reporting and directional stakeholder estimates.</p>
@@ -794,27 +795,27 @@
         <div class="metrics">
           <div class="metric">
             <div class="metric-value">75<span class="accent">%</span></div>
-            <div class="metric-label">Fewer clicks for common tasks</div>
+            <div class="metric-label">Fewer clicks for<br>common tasks</div>
           </div>
           <div class="metric">
             <div class="metric-value">1.5<span class="accent">hr</span></div>
-            <div class="metric-label">Saved per fund creation</div>
+            <div class="metric-label">Saved per fund<br>creation</div>
           </div>
           <div class="metric">
             <div class="metric-value">99<span class="accent">%+</span></div>
-            <div class="metric-label">Reduction in data entry errors</div>
+            <div class="metric-label">Reduction in data<br>entry errors</div>
           </div>
           <div class="metric">
             <div class="metric-value">90<span class="accent">%</span></div>
-            <div class="metric-label">Time saved on rebalancing</div>
+            <div class="metric-label">Time saved on<br>rebalancing</div>
           </div>
           <div class="metric">
             <div class="metric-value">One</div>
-            <div class="metric-label">Catastrophic error averted</div>
+            <div class="metric-label">Catastrophic<br>error averted</div>
           </div>
           <div class="metric">
             <div class="metric-value">Four</div>
-            <div class="metric-label">Legacy systems combined into one</div>
+            <div class="metric-label">Legacy systems<br>combined into one</div>
           </div>
         </div>
         <p class="metrics-footnote">Sourced from stakeholder estimates.</p>
@@ -978,7 +979,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v72</span>
+        <span class="footer-version">v73</span>
       </div>
     </div>
   </footer>
