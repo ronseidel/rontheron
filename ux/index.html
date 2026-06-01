@@ -110,6 +110,7 @@
     v71 — 2026-06-01 — Hero button "Download Resume" -> "Resume"; section labels centered between two hairlines; metrics + footnote centered within centered case studies
     v72 — 2026-06-01 — Scoped centered section-label to #work only (matches centered case studies); ABOUT/PRAISE/IMPACT back to left-aligned over their left content
     v73 — 2026-06-01 — Mobile polish: hero buttons side-by-side (equal width); industry strip split into two groups so it wraps cleanly with no orphan bullet; case-study body centered on mobile; featured quote fills full container width (matches supporting quotes); all metric labels forced to two lines for uniformity; impact year ranges (2017–21) no longer wrap
+    v74 — 2026-06-01 — Mobile featured quote had 32px horizontal padding while supporting quotes had none — zeroed it so the featured quote spans the same width (edges now align)
     ============================================================
     */
 
@@ -652,7 +653,7 @@
       .case-images { grid-template-columns: 1fr; gap: 16px; }
       #about .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .quote-card { grid-template-columns: 1fr; grid-template-areas: "text" "attr"; gap: 20px; padding: 32px 0; }
-      .quote-featured { padding: 32px; margin-bottom: 32px; }
+      .quote-featured { padding: 0; margin-bottom: 40px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
       #impact .impact-list li { grid-template-columns: 64px 1fr; gap: 16px; }
       .metrics { grid-template-columns: repeat(2, 1fr); }
@@ -979,7 +980,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v73</span>
+        <span class="footer-version">v74</span>
       </div>
     </div>
   </footer>
