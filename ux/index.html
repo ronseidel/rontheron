@@ -105,6 +105,10 @@
     v66 — 2026-05-31 — Rewrote Expertise list to sharper, defensible items (Integrated Connected Systems, AI-Driven Workflows, Prototypes That Win Business, Designs and Ships); dropped generic entries
     v67 — 2026-06-01 — Metrics: removed outer box + vertical lines; single horizontal hairline between rows, more padding so numbers breathe
     v68 — 2026-06-01 — Metrics footnotes left-aligned (were centered) to match the now left-aligned metrics
+    v69 — 2026-06-01 — Mobile fix: industry strip had no spaces (unbreakable string) forcing horizontal overflow; added spaces so it wraps, trimmed sep margin, added overflow-x: clip backstop
+    v70 — 2026-06-01 — Mobile hero: centered eyebrow + industry strip; buttons stay side-by-side down to 600px then stack full-width (section labels + metrics left as-is)
+    v71 — 2026-06-01 — Hero button "Download Resume" -> "Resume"; section labels centered between two hairlines; metrics + footnote centered within centered case studies
+    v72 — 2026-06-01 — Scoped centered section-label to #work only (matches centered case studies); ABOUT/PRAISE/IMPACT back to left-aligned over their left content
     ============================================================
     */
 
@@ -121,7 +125,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
     body {
       font-family: var(--body);
       background: var(--bg);
@@ -260,9 +264,10 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--ink);
+      line-height: 2;
       margin-bottom: 40px;
     }
-    .hero-industries .sep { color: var(--accent); margin: 0 12px; }
+    .hero-industries .sep { color: var(--accent); margin: 0 6px; }
     .hero-actions { display: flex; gap: 20px; align-items: center; }
     .btn {
       font-family: var(--body);
@@ -294,6 +299,12 @@
       gap: 16px;
     }
     .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    #work .section-label::before {
       content: '';
       flex: 1;
       height: 1px;
@@ -429,7 +440,8 @@
 
     .case-study--centered .case-meta { flex-direction: column; align-items: center; text-align: center; }
     .case-study--centered .case-title { text-align: center; max-width: 860px; margin-left: auto; margin-right: auto; }
-    .case-study--centered .metrics-footnote { text-align: left; }
+    .case-study--centered .metrics-footnote { text-align: center; }
+    .case-study--centered .metric { text-align: center; padding-left: 0; padding-right: 0; }
 
     .case-body {
       display: grid;
@@ -624,12 +636,12 @@
       nav#bottom-nav { display: block; }
       body { padding-bottom: 72px; }
       #hero { padding-top: 100px; padding-bottom: 72px; min-height: 0; }
-      .hero-eyebrow { align-items: flex-start; }
-      .hero-eyebrow::before { margin-top: 7px; }
-      .hero-eyebrow .eyebrow-items { display: flex; flex-direction: column; gap: 3px; }
+      .hero-eyebrow { text-align: center; }
+      .hero-headline { text-align: center; }
+      .hero-eyebrow .eyebrow-items { display: flex; flex-direction: column; align-items: center; gap: 3px; }
       .hero-eyebrow .eyebrow-sep { display: none; }
-      .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
-      .hero-actions .btn { width: 100%; text-align: center; }
+      .hero-industries { text-align: center; }
+      .hero-actions { justify-content: center; gap: 12px; }
       .case-body { grid-template-columns: 1fr; gap: 32px; }
       .case-images { grid-template-columns: 1fr; gap: 16px; }
       #about .about-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -644,6 +656,11 @@
       .case-study { margin-bottom: 72px; }
       .case-divider { margin-bottom: 48px; }
       .section-label { margin-bottom: 40px; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions .btn { width: 100%; text-align: center; }
     }
 
     @media (max-width: 480px) {
@@ -678,10 +695,10 @@
       <h1 class="hero-headline reveal" style="transition-delay:0.1s">
         Software that feels like <em>butter</em>
       </h1>
-      <p class="hero-industries reveal" style="transition-delay:0.15s">Finance<span class="sep">•</span>Logistics<span class="sep">•</span>Cybersecurity<span class="sep">•</span>Healthcare<span class="sep">•</span>Gov't</p>
+      <p class="hero-industries reveal" style="transition-delay:0.15s">Finance <span class="sep">•</span> Logistics <span class="sep">•</span> Cybersecurity <span class="sep">•</span> Healthcare <span class="sep">•</span> Gov't</p>
       <div class="hero-actions reveal" style="transition-delay:0.2s">
         <a href="#work" class="btn">Work</a>
-        <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank" class="btn btn-ghost">Download Resume</a>
+        <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank" class="btn btn-ghost">Resume</a>
       </div>
     </div>
   </section>
@@ -961,7 +978,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v68</span>
+        <span class="footer-version">v72</span>
       </div>
     </div>
   </footer>
