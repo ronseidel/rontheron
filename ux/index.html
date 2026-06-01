@@ -111,6 +111,9 @@
     v72 — 2026-06-01 — Scoped centered section-label to #work only (matches centered case studies); ABOUT/PRAISE/IMPACT back to left-aligned over their left content
     v73 — 2026-06-01 — Mobile polish: hero buttons side-by-side (equal width); industry strip split into two groups so it wraps cleanly with no orphan bullet; case-study body centered on mobile; featured quote fills full container width (matches supporting quotes); all metric labels forced to two lines for uniformity; impact year ranges (2017–21) no longer wrap
     v74 — 2026-06-01 — Mobile featured quote had 32px horizontal padding while supporting quotes had none — zeroed it so the featured quote spans the same width (edges now align)
+    v75 — 2026-06-01 — Reverted mobile case-body to left-aligned (centered long-form hurt readability); metric-label line breaks now mobile-only (class .mbr toggled by media query) with preserved word spacing on desktop; removed min-height
+    v76 — 2026-06-01 — Hero buttons no longer stretch to half-width on mobile (dropped flex:1); now content-sized and centered as a pair
+    v77 — 2026-06-01 — Resume button contrast fix: green label on light bg was 2.38:1 (failed). Label now ink (18:1); kept bright green border + green hover fill with ink text (7.75:1) so it still reads as the accent button without darkening the brand green
     ============================================================
     */
 
@@ -286,8 +289,8 @@
       display: inline-block;
     }
     .btn:hover { background: var(--ink); color: var(--bg); }
-    .btn-ghost { border-color: var(--accent); color: var(--accent); }
-    .btn-ghost:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-ghost { border-color: var(--accent); color: var(--ink); }
+    .btn-ghost:hover { background: var(--accent); color: var(--ink); border-color: var(--accent); }
 
     .section-label {
       font-family: var(--body);
@@ -380,8 +383,8 @@
       color: var(--muted);
       line-height: 1.45;
       letter-spacing: 0;
-      min-height: 2.9em;
     }
+    .metric-label .mbr { display: none; }
     .metric-note {
       font-size: 10px;
       text-transform: uppercase;
@@ -648,8 +651,7 @@
       .hero-industries .ind-group { display: block; white-space: nowrap; }
       .hero-industries .sep-fold { display: none; }
       .hero-actions { justify-content: center; gap: 12px; }
-      .hero-actions .btn { flex: 1; text-align: center; }
-      .case-body { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      .case-body { grid-template-columns: 1fr; gap: 32px; }
       .case-images { grid-template-columns: 1fr; gap: 16px; }
       #about .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .quote-card { grid-template-columns: 1fr; grid-template-areas: "text" "attr"; gap: 20px; padding: 32px 0; }
@@ -658,6 +660,7 @@
       #impact .impact-list li { grid-template-columns: 64px 1fr; gap: 16px; }
       .metrics { grid-template-columns: repeat(2, 1fr); }
       .metric { padding: 28px 24px 28px 0; border-bottom: none; }
+      .metric-label .mbr { display: inline; }
       .metric:nth-child(-n+4) { border-bottom: 1px solid var(--border); }
       #quotes { padding: 72px 0; }
       .case-study { margin-bottom: 72px; }
@@ -733,30 +736,30 @@
         <div class="metrics">
           <div class="metric">
             <div class="metric-value">95<span class="accent">%+</span></div>
-            <div class="metric-label">Accounts opened<br>digitally</div>
+            <div class="metric-label">Accounts opened <br class="mbr">digitally</div>
             <div class="metric-note">Up from &lt;50%</div>
           </div>
           <div class="metric">
             <div class="metric-value">10<span class="accent">K+</span></div>
-            <div class="metric-label">Manual emails<br>eliminated</div>
+            <div class="metric-label">Manual emails <br class="mbr">eliminated</div>
           </div>
           <div class="metric">
             <div class="metric-value">200<span class="accent">%+</span></div>
-            <div class="metric-label">Prospecting<br>tool usage</div>
+            <div class="metric-label">Prospecting <br class="mbr">tool usage</div>
           </div>
           <div class="metric">
             <div class="metric-value">25<span class="accent">%+</span></div>
-            <div class="metric-label">Reduction in<br>dev time</div>
+            <div class="metric-label">Reduction in <br class="mbr">dev time</div>
             <div class="metric-note">Projected</div>
           </div>
           <div class="metric">
             <div class="metric-value">3<span class="accent">min</span></div>
-            <div class="metric-label">Saved per<br>account action</div>
+            <div class="metric-label">Saved per <br class="mbr">account action</div>
             <div class="metric-note">Projected</div>
           </div>
           <div class="metric">
             <div class="metric-value">5</div>
-            <div class="metric-label">Initiatives led as<br>primary designer</div>
+            <div class="metric-label">Initiatives led as <br class="mbr">primary designer</div>
           </div>
         </div>
         <p class="metrics-footnote">Metrics reflect a mix of internal reporting and directional stakeholder estimates.</p>
@@ -796,27 +799,27 @@
         <div class="metrics">
           <div class="metric">
             <div class="metric-value">75<span class="accent">%</span></div>
-            <div class="metric-label">Fewer clicks for<br>common tasks</div>
+            <div class="metric-label">Fewer clicks for <br class="mbr">common tasks</div>
           </div>
           <div class="metric">
             <div class="metric-value">1.5<span class="accent">hr</span></div>
-            <div class="metric-label">Saved per fund<br>creation</div>
+            <div class="metric-label">Saved per fund <br class="mbr">creation</div>
           </div>
           <div class="metric">
             <div class="metric-value">99<span class="accent">%+</span></div>
-            <div class="metric-label">Reduction in data<br>entry errors</div>
+            <div class="metric-label">Reduction in data <br class="mbr">entry errors</div>
           </div>
           <div class="metric">
             <div class="metric-value">90<span class="accent">%</span></div>
-            <div class="metric-label">Time saved on<br>rebalancing</div>
+            <div class="metric-label">Time saved on <br class="mbr">rebalancing</div>
           </div>
           <div class="metric">
             <div class="metric-value">One</div>
-            <div class="metric-label">Catastrophic<br>error averted</div>
+            <div class="metric-label">Catastrophic <br class="mbr">error averted</div>
           </div>
           <div class="metric">
             <div class="metric-value">Four</div>
-            <div class="metric-label">Legacy systems<br>combined into one</div>
+            <div class="metric-label">Legacy systems <br class="mbr">combined into one</div>
           </div>
         </div>
         <p class="metrics-footnote">Sourced from stakeholder estimates.</p>
@@ -980,7 +983,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v74</span>
+        <span class="footer-version">v77</span>
       </div>
     </div>
   </footer>
