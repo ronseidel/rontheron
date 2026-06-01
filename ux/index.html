@@ -94,6 +94,17 @@
     v55 — 2026-05-31 — Footer copy ("South Orange, NJ · 2026") was hardcoded to rgba(0,0,0,0.2) — now uses --muted so it's readable; nudged version marker up slightly
     v56 — 2026-05-31 — Added Söhne Buch Kursiv (400 italic) @font-face to scaffold for the featured pull-quote
     v57 — 2026-05-31 — Söhne @font-face activated (5 cuts self-hosted at /fonts/); site now renders real Söhne for all visitors, Instrument Sans fallback
+    v58 — 2026-05-31 — Hero copy rewrite: headline "Software that feels like butter" (green on butter) + new stakes deck
+    v59 — 2026-05-31 — Hero deck: "Misclicks become headlines." set on its own line; parallel "Where... Where..." ending
+    v60 — 2026-05-31 — Reverted deck line break (typo); flows as one paragraph
+    v61 — 2026-05-31 — Hero deck shortened to "These are ten-digit ballgames."; moved full stakes paragraph to open the About (replacing the generic opener), with tenure/role kept as a smaller sub-line
+    v62 — 2026-05-31 — Hero line -> industry strip (Finance • Logistics • Cybersecurity • Healthcare • Gov't), green bullet separators
+    v63 — 2026-05-31 — About: bolded the closing payoff ("Where big players make big moves. Where top-tier teams call me to design.")
+    v64 — 2026-05-31 — About payoff now bold + green (accent), rhyming with the hero "butter"
+    v65 — 2026-05-31 — About: "Where big players make big moves." back to bold-black; only final line "Where top-tier teams call me to design." is bold + green
+    v66 — 2026-05-31 — Rewrote Expertise list to sharper, defensible items (Integrated Connected Systems, AI-Driven Workflows, Prototypes That Win Business, Designs and Ships); dropped generic entries
+    v67 — 2026-06-01 — Metrics: removed outer box + vertical lines; single horizontal hairline between rows, more padding so numbers breathe
+    v68 — 2026-06-01 — Metrics footnotes left-aligned (were centered) to match the now left-aligned metrics
     ============================================================
     */
 
@@ -239,10 +250,19 @@
       letter-spacing: -0.02em;
       color: var(--ink);
       max-width: none;
-      margin-bottom: 44px;
+      margin-bottom: 28px;
       text-wrap: balance;
     }
     .hero-headline em { font-style: normal; font-weight: inherit; color: var(--accent); }
+    .hero-industries {
+      font-size: clamp(12px, 1.1vw, 14px);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 40px;
+    }
+    .hero-industries .sep { color: var(--accent); margin: 0 12px; }
     .hero-actions { display: flex; gap: 20px; align-items: center; }
     .btn {
       font-family: var(--body);
@@ -325,17 +345,12 @@
     .metrics {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      border: 1px solid var(--border);
       margin-bottom: 12px;
     }
     .metric {
-      padding: 32px 28px;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      padding: 40px 36px 40px 0;
     }
-    .metric:nth-child(3n) { border-right: none; }
-    .metric:nth-last-child(-n+3):nth-child(3n+1),
-    .metric:nth-last-child(-n+3):nth-child(3n+1) ~ .metric { border-bottom: none; }
+    .metric:nth-child(-n+3) { border-bottom: 1px solid var(--border); }
     .metric-value {
       font-family: var(--display);
       font-size: clamp(36px, 4vw, 56px);
@@ -414,7 +429,7 @@
 
     .case-study--centered .case-meta { flex-direction: column; align-items: center; text-align: center; }
     .case-study--centered .case-title { text-align: center; max-width: 860px; margin-left: auto; margin-right: auto; }
-    .case-study--centered .metrics-footnote { text-align: center; }
+    .case-study--centered .metrics-footnote { text-align: left; }
 
     .case-body {
       display: grid;
@@ -447,9 +462,18 @@
       font-weight: 400;
       line-height: 1.5;
       letter-spacing: -0.01em;
-      text-wrap: balance;
+      text-wrap: pretty;
     }
     .about-bio strong { font-weight: 600; }
+    .about-bio strong.payoff { color: var(--accent); }
+    .about-sub {
+      font-size: clamp(15px, 1.4vw, 17px);
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--muted);
+      margin-top: 28px;
+      max-width: 560px;
+    }
     .expertise-list { list-style: none; margin-bottom: 48px; }
     .expertise-list li {
       padding: 14px 0;
@@ -614,12 +638,8 @@
       .footer-inner { flex-direction: column; align-items: flex-start; }
       #impact .impact-list li { grid-template-columns: 52px 1fr; gap: 16px; }
       .metrics { grid-template-columns: repeat(2, 1fr); }
-      .metric,
-      .metric:nth-child(3n),
-      .metric:nth-last-child(-n+3):nth-child(3n+1),
-      .metric:nth-last-child(-n+3):nth-child(3n+1) ~ .metric { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-      .metric:nth-child(2n) { border-right: none; }
-      .metric:nth-last-child(-n+2) { border-bottom: none; }
+      .metric { padding: 28px 24px 28px 0; border-bottom: none; }
+      .metric:nth-child(-n+4) { border-bottom: 1px solid var(--border); }
       #quotes { padding: 72px 0; }
       .case-study { margin-bottom: 72px; }
       .case-divider { margin-bottom: 48px; }
@@ -629,7 +649,7 @@
     @media (max-width: 480px) {
       #hero { padding-top: 100px; padding-bottom: 56px; }
       .hero-headline { font-size: clamp(36px, 10vw, 56px); margin-bottom: 36px; }
-      .metric { padding: 20px 16px; }
+      .metric { padding: 22px 16px 22px 0; }
       .metric-value { font-size: clamp(28px, 7vw, 42px); }
       .quote-card { padding: 28px 0; }
       .footer-links { flex-wrap: wrap; gap: 16px; }
@@ -656,8 +676,9 @@
     <div class="container">
       <p class="hero-eyebrow reveal"><span class="eyebrow-items"><span class="eyebrow-title">Product Designer</span><span class="eyebrow-sep">&ensp;·&ensp;</span><span>13+ Years</span><span class="eyebrow-sep">&ensp;·&ensp;</span><span>NYC / NJ / Remote</span></span></p>
       <h1 class="hero-headline reveal" style="transition-delay:0.1s">
-        I make data-rich systems feel <em>simple</em> and predictable
+        Software that feels like <em>butter</em>
       </h1>
+      <p class="hero-industries reveal" style="transition-delay:0.15s">Finance<span class="sep">•</span>Logistics<span class="sep">•</span>Cybersecurity<span class="sep">•</span>Healthcare<span class="sep">•</span>Gov't</p>
       <div class="hero-actions reveal" style="transition-delay:0.2s">
         <a href="#work" class="btn">Work</a>
         <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank" class="btn btn-ghost">Download Resume</a>
@@ -804,18 +825,21 @@
       <div class="about-grid reveal">
         <div>
           <p class="about-bio">
-            For 13+ years I've designed <strong>regulated, high-stakes platforms</strong> across finance, cybersecurity, logistics, healthcare, and government. Currently embedded at a top-tier investment bank through Publicis Sapient.
+            Misclicks become headlines. A late rebalancing moves the market. Breach incidents. Health records. Pensions. Retailers with thousands of SKUs. These are ten-digit ballgames. <strong>Where big players make big moves.</strong> <strong class="payoff">Where top-tier teams call me to design.</strong>
+          </p>
+          <p class="about-sub">
+            13+ years across finance, cybersecurity, logistics, healthcare, and government. Currently embedded at a global investment bank through Publicis Sapient.
           </p>
         </div>
         <div class="about-right">
           <ul class="expertise-list">
-            <li><strong>Complex Systems & Data-Rich Interfaces</strong></li>
-            <li><strong>Design Systems</strong> <span>Figma, Framer, Webflow</span></li>
-            <li><strong>Workflow & Interaction Design</strong></li>
-            <li><strong>AI-Driven Product Design</strong></li>
-            <li><strong>Cross-Disciplinary Collaboration</strong></li>
-            <li><strong>Dev-Ready Handoff</strong> <span>HTML, CSS, JS</span></li>
-            <li><strong>Accessibility & Usability Research</strong></li>
+            <li><strong>Data-Rich Web Applications</strong></li>
+            <li><strong>Integrated, Connected Systems</strong></li>
+            <li><strong>Design Systems at Scale</strong></li>
+            <li><strong>0→1 Platform UX</strong></li>
+            <li><strong>AI-Driven Workflows</strong></li>
+            <li><strong>Prototypes That Win Business</strong></li>
+            <li><strong>Designs and Ships</strong> <span>HTML, CSS, JS</span></li>
           </ul>
           <div class="contact-block">
             <p>Available for roles in NYC/NJ or remote. Open to full-time and contract.</p>
@@ -937,7 +961,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v57</span>
+        <span class="footer-version">v68</span>
       </div>
     </div>
   </footer>
