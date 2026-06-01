@@ -117,6 +117,11 @@
     v78 — 2026-06-01 — Case 1 lead rewritten (Ron voice): five-paragraph narrative wrapped in .case-desc-group so it stays one grid column; added inter-paragraph spacing
     v79 — 2026-06-01 — Case 2 lead rewritten (Ron voice): nine-paragraph narrative ending on a direct PM quote; wrapped in .case-desc-group; removed the old em dash
     v80 — 2026-06-01 — Case 2 trimmed to six-paragraph radio edit (cut transition/aside/spec lines); better column balance; magnum opus left deadpan (funds-of-funds context carries the joke)
+    v81 — 2026-06-01 — Mobile bottom-nav active-section indicator: current section tab goes ink + short green top bar (others muted); rAF scroll-spy (position-based, robust to anchor jumps); hero shows none, impact/footer keep last (Praise); green used functionally for wayfinding only, one tab at a time
+    v82 — 2026-06-01 — Extended active-section indicator to desktop top nav (ink + thin underline; Resume CTA unaffected); single scroll-spy now drives both top and bottom navs in sync
+    v83 — 2026-06-01 — Reordered page to Work -> About -> Impact -> Praise (proof before testimonials); added Impact tab to both navs (5 tabs; Lucide award placeholder icon); desktop active indicator now green 2px underline to match mobile bar; scroll-spy order updated
+    v84 — 2026-06-01 — Case copy edits (Ron): CS1 colon opener, "galaxy", tightened closer; CS2 "magnum opus" opener trimmed, Mindy/teachers split into two beats
+    v85 — 2026-06-01 — CS2 closer corrected to source: removed invented "six weeks"; exact client quote with ellipsis + [Ron did] bracket; ends on skeptical PM (Jill) "off the charts good!" closing the skeptic arc; added paragraph splits per Ron
     ============================================================
     */
 
@@ -180,8 +185,18 @@
       text-decoration: none;
       color: var(--muted);
       transition: color 0.2s;
+      position: relative;
     }
     .nav-links a:hover { color: var(--ink); }
+    .nav-links a.is-active { color: var(--ink); }
+    .nav-links a.is-active::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -5px;
+      height: 2px;
+      background: var(--accent);
+    }
     .nav-links a.cta { color: var(--accent); font-weight: 500; }
     .nav-links a.cta:hover { color: var(--ink); }
 
@@ -197,7 +212,7 @@
     }
     .bottom-nav-inner {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
     }
     .bottom-nav-item {
       display: flex;
@@ -209,8 +224,20 @@
       text-decoration: none;
       color: var(--muted);
       transition: color 0.2s;
+      position: relative;
     }
     .bottom-nav-item:hover { color: var(--ink); }
+    .bottom-nav-item.is-active { color: var(--ink); }
+    .bottom-nav-item.is-active::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 2px;
+      background: var(--accent);
+    }
     .bottom-nav-item svg { width: 20px; height: 20px; stroke-width: 1.75; }
     .bottom-nav-label {
       font-family: var(--body);
@@ -693,6 +720,7 @@
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#impact">Impact</a></li>
       <li><a href="#quotes">Praise</a></li>
       <li><a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank" class="cta">Resume</a></li>
     </ul>
@@ -770,11 +798,11 @@
 
         <div class="case-body">
           <div class="case-desc-group">
-            <p class="case-desc">Publicis Sapient embeds me at the crown jewel of our finance consulting practice. A real life Wall Street giant often used as an archetype by Hollywood.</p>
+            <p class="case-desc">Publicis Sapient embeds me at the crown jewel of our finance consulting practice: a Wall Street giant often used as an archetype by Hollywood.</p>
             <p class="case-desc">Our software helps wealth management teams open and manage accounts for high- and very-high-net-worth individuals.</p>
             <p class="case-desc">I focus on helping advisors explain the value (quantified tax-savings) of our products.</p>
-            <p class="case-desc">Clever, sophisticated strategies can outperform the entire universe, but if end-investors can't grasp, at least partially, what future estimates mean, they won't open accounts.</p>
-            <p class="case-desc">And that's the value of our software: clarity while prospecting and considering a new account; frictionless onboarding when the time is right and the numbers make sense; and efficient, transparent, calming account management.</p>
+            <p class="case-desc">Clever, sophisticated strategies can outperform the galaxy, but if end-investors can’t grasp, at least partially, what estimates mean, they won’t open accounts.</p>
+            <p class="case-desc">That’s the value of our software: clarity while prospecting and considering opening new accounts; frictionless onboarding when the time is right and the numbers make sense; and efficient, transparent, calming account management.</p>
           </div>
           <ul class="case-bullets">
             <li>Led 2025's flagship initiative, eliminating ~11K manual emails with a fully digital selection flow</li>
@@ -833,12 +861,15 @@
         <p class="metrics-footnote">Sourced from stakeholder estimates.</p>
         <div class="case-body">
           <div class="case-desc-group">
-            <p class="case-desc">In my design career, this is my magnum opus. A system made of disparate parts. Two teams expected to unite. Disagreement over operating procedures. A product manager skeptical of the design process.</p>
-            <p class="case-desc">Frankensteinian UIs with almost comically repetitive processes. Big money on the line. Pensions, endowments, mega corporations.</p>
-            <p class="case-desc">Mistakes wouldn't cause extra work for Mindy in accounting. Mistakes mean every teacher in New England is knocking at your door. Hyperbole, yes. But kinda real.</p>
+            <p class="case-desc">My design career’s magnum opus. A system made of disparate parts.</p>
+            <p class="case-desc">Two teams expected to unite. Disagreement over operating procedures. A product manager skeptical of the design process.</p>
+            <p class="case-desc">Frankensteinian UIs with comically repetitive processes. Big money. Pensions, endowments, mega corporations.</p>
+            <p class="case-desc">Mistakes wouldn’t cause extra work for Mindy in accounting.</p>
+            <p class="case-desc">Mistakes mean all the teachers in New England are knocking at your door. Hyperbole, yes. But kinda real.</p>
             <p class="case-desc">I built the design system in Figma from scratch. A great education.</p>
             <p class="case-desc">The designs were solid. They let data breathe. Inline editing. A novel maker-checker pattern that makes team collaboration and communication cleaner. The kind of control that prevents catastrophe.</p>
-            <p class="case-desc">The skeptical PM had a flow she expected to take six weeks to redesign. A few days later, she told a teammate: "In three days, Ron did what we thought would take weeks and weeks."</p>
+            <p class="case-desc">Later on we asked for client feedback on my work.</p>
+            <p class="case-desc">“…in three days this week [Ron did] what we thought would take weeks and weeks.” And the skeptical PM? She goes: “Ron is off the charts good!”</p>
           </div>
           <ul class="case-bullets">
             <li>Identified a missing maker-checker control that would have allowed unilateral movement of billions without oversight</li>
@@ -883,50 +914,6 @@
               <a href="https://linkedin.com/in/ronseidel" target="_blank">LinkedIn</a>
               <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="quotes">
-    <div class="container">
-      <p class="section-label reveal" style="color:rgba(255,255,255,0.3)">Praise</p>
-      <div class="quote-featured reveal">
-        <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">Ron is very easy to work with. He is collaborative, reliable and consistently raises the standard of the work around him. A great asset to any design team.</p>
-        <div class="quote-attr">
-          <strong>Geoff Biskupek</strong>
-          Principal UI Designer & Design Systems Lead<br>
-          Senior Colleague · Goldman Sachs
-        </div>
-      </div>
-      <div class="quotes-grid">
-        <div class="quote-card reveal">
-          <span class="quote-mark">&ldquo;</span>
-          <p class="quote-text">Ron operates above the ordinary in creating the most stylistic and functional user interfaces… He reimagined functionalities and proposed notable improvements to the activity flow.</p>
-          <div class="quote-attr">
-            <strong>Sam Ekunseitan</strong>
-            VP, Global IT Leader<br>
-            Ron's Client · Fidelity
-          </div>
-        </div>
-        <div class="quote-card reveal" style="transition-delay:0.1s">
-          <span class="quote-mark">&ldquo;</span>
-          <p class="quote-text">He's a consistent top performer in everything UX… super productive with a great eye and an intellect that breaks IQ tests. Ron's curious, creative, a natural problem-solver, and a great team player.</p>
-          <div class="quote-attr">
-            <strong>John Consigli</strong>
-            UX Design & Research Leader<br>
-            Ron's Direct Manager · Prudential
-          </div>
-        </div>
-        <div class="quote-card reveal" style="transition-delay:0.15s">
-          <span class="quote-mark">&ldquo;</span>
-          <p class="quote-text">Ron will challenge ideas or opinions that he knows won't work and is able to explain the whys. He is genuinely a super nice guy and a pleasure to work with.</p>
-          <div class="quote-attr">
-            <strong>Judith Shea</strong>
-            Head of Design<br>
-            Managed Ron · Prudential
           </div>
         </div>
       </div>
@@ -983,7 +970,49 @@
     </div>
   </section>
 
-  <hr class="rule">
+  <section id="quotes">
+    <div class="container">
+      <p class="section-label reveal" style="color:rgba(255,255,255,0.3)">Praise</p>
+      <div class="quote-featured reveal">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Ron is very easy to work with. He is collaborative, reliable and consistently raises the standard of the work around him. A great asset to any design team.</p>
+        <div class="quote-attr">
+          <strong>Geoff Biskupek</strong>
+          Principal UI Designer & Design Systems Lead<br>
+          Senior Colleague · Goldman Sachs
+        </div>
+      </div>
+      <div class="quotes-grid">
+        <div class="quote-card reveal">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">Ron operates above the ordinary in creating the most stylistic and functional user interfaces… He reimagined functionalities and proposed notable improvements to the activity flow.</p>
+          <div class="quote-attr">
+            <strong>Sam Ekunseitan</strong>
+            VP, Global IT Leader<br>
+            Ron's Client · Fidelity
+          </div>
+        </div>
+        <div class="quote-card reveal" style="transition-delay:0.1s">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">He's a consistent top performer in everything UX… super productive with a great eye and an intellect that breaks IQ tests. Ron's curious, creative, a natural problem-solver, and a great team player.</p>
+          <div class="quote-attr">
+            <strong>John Consigli</strong>
+            UX Design & Research Leader<br>
+            Ron's Direct Manager · Prudential
+          </div>
+        </div>
+        <div class="quote-card reveal" style="transition-delay:0.15s">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">Ron will challenge ideas or opinions that he knows won't work and is able to explain the whys. He is genuinely a super nice guy and a pleasure to work with.</p>
+          <div class="quote-attr">
+            <strong>Judith Shea</strong>
+            Head of Design<br>
+            Managed Ron · Prudential
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="container">
@@ -996,7 +1025,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v80</span>
+        <span class="footer-version">v85</span>
       </div>
     </div>
   </footer>
@@ -1010,6 +1039,10 @@
       <a href="#about" class="bottom-nav-item">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></svg>
         <span class="bottom-nav-label">About</span>
+      </a>
+      <a href="#impact" class="bottom-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/></svg>
+        <span class="bottom-nav-label">Impact</span>
       </a>
       <a href="#quotes" class="bottom-nav-item">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14a2 2 0 0 0 2-2V8h-2"/><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M8 14a2 2 0 0 0 2-2V8H8"/></svg>
@@ -1044,6 +1077,43 @@
         setTimeout(() => el.classList.add('visible'), i * 120);
       });
     }, 100);
+
+    // Active-section indicator for both navs (scroll-spy)
+    (() => {
+      const links = document.querySelectorAll('#bottom-nav .bottom-nav-item, #nav .nav-links a');
+      const byId = {};
+      links.forEach(a => {
+        const href = a.getAttribute('href') || '';
+        if (href.charAt(0) === '#') {
+          const id = href.slice(1);
+          (byId[id] = byId[id] || []).push(a);
+        }
+      });
+      const order = ['work', 'about', 'impact', 'quotes'];
+      let lastActive;
+      const apply = id => {
+        if (id === lastActive) return;
+        lastActive = id;
+        links.forEach(a => a.classList.remove('is-active'));
+        if (id && byId[id]) byId[id].forEach(a => a.classList.add('is-active'));
+      };
+      const update = () => {
+        const line = window.innerHeight * 0.45;
+        let current = null;
+        for (const id of order) {
+          const el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top <= line) current = id;
+        }
+        apply(current);
+      };
+      let ticking = false;
+      const onScroll = () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(() => { update(); ticking = false; }); }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
+    })();
   </script>
 </body>
 </html>
