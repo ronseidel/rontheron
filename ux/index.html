@@ -114,6 +114,9 @@
     v75 — 2026-06-01 — Reverted mobile case-body to left-aligned (centered long-form hurt readability); metric-label line breaks now mobile-only (class .mbr toggled by media query) with preserved word spacing on desktop; removed min-height
     v76 — 2026-06-01 — Hero buttons no longer stretch to half-width on mobile (dropped flex:1); now content-sized and centered as a pair
     v77 — 2026-06-01 — Resume button contrast fix: green label on light bg was 2.38:1 (failed). Label now ink (18:1); kept bright green border + green hover fill with ink text (7.75:1) so it still reads as the accent button without darkening the brand green
+    v78 — 2026-06-01 — Case 1 lead rewritten (Ron voice): five-paragraph narrative wrapped in .case-desc-group so it stays one grid column; added inter-paragraph spacing
+    v79 — 2026-06-01 — Case 2 lead rewritten (Ron voice): nine-paragraph narrative ending on a direct PM quote; wrapped in .case-desc-group; removed the old em dash
+    v80 — 2026-06-01 — Case 2 trimmed to six-paragraph radio edit (cut transition/aside/spec lines); better column balance; magnum opus left deadpan (funds-of-funds context carries the joke)
     ============================================================
     */
 
@@ -457,6 +460,7 @@
       padding-top: 8px;
     }
     .case-desc { font-size: 16px; line-height: 1.7; color: var(--ink); font-weight: 400; }
+    .case-desc-group .case-desc + .case-desc { margin-top: 1.1em; }
     .case-bullets { list-style: none; }
     .case-bullets li {
       font-size: 14px;
@@ -765,9 +769,13 @@
         <p class="metrics-footnote">Metrics reflect a mix of internal reporting and directional stakeholder estimates.</p>
 
         <div class="case-body">
-          <p class="case-desc">
-            Primary designer for three new products and a year-defining initiative at a top-tier global investment bank, embedded through Publicis Sapient. Partnered with two engineering squads and multiple product managers across prospecting, onboarding, and account management.
-          </p>
+          <div class="case-desc-group">
+            <p class="case-desc">Publicis Sapient embeds me at the crown jewel of our finance consulting practice. A real life Wall Street giant often used as an archetype by Hollywood.</p>
+            <p class="case-desc">Our software helps wealth management teams open and manage accounts for high- and very-high-net-worth individuals.</p>
+            <p class="case-desc">I focus on helping advisors explain the value (quantified tax-savings) of our products.</p>
+            <p class="case-desc">Clever, sophisticated strategies can outperform the entire universe, but if end-investors can't grasp, at least partially, what future estimates mean, they won't open accounts.</p>
+            <p class="case-desc">And that's the value of our software: clarity while prospecting and considering a new account; frictionless onboarding when the time is right and the numbers make sense; and efficient, transparent, calming account management.</p>
+          </div>
           <ul class="case-bullets">
             <li>Led 2025's flagship initiative, eliminating ~11K manual emails with a fully digital selection flow</li>
             <li>Built standardized layouts and interaction patterns, projected to cut dev time by 25%+</li>
@@ -824,9 +832,14 @@
         </div>
         <p class="metrics-footnote">Sourced from stakeholder estimates.</p>
         <div class="case-body">
-          <p class="case-desc">
-            Led end-to-end experience strategy and complex workflow redesign for an internal funds management system at a major asset manager. Four legacy systems, hundreds of clicks per task, and high risk of costly errors — redesigned into a single, coherent platform.
-          </p>
+          <div class="case-desc-group">
+            <p class="case-desc">In my design career, this is my magnum opus. A system made of disparate parts. Two teams expected to unite. Disagreement over operating procedures. A product manager skeptical of the design process.</p>
+            <p class="case-desc">Frankensteinian UIs with almost comically repetitive processes. Big money on the line. Pensions, endowments, mega corporations.</p>
+            <p class="case-desc">Mistakes wouldn't cause extra work for Mindy in accounting. Mistakes mean every teacher in New England is knocking at your door. Hyperbole, yes. But kinda real.</p>
+            <p class="case-desc">I built the design system in Figma from scratch. A great education.</p>
+            <p class="case-desc">The designs were solid. They let data breathe. Inline editing. A novel maker-checker pattern that makes team collaboration and communication cleaner. The kind of control that prevents catastrophe.</p>
+            <p class="case-desc">The skeptical PM had a flow she expected to take six weeks to redesign. A few days later, she told a teammate: "In three days, Ron did what we thought would take weeks and weeks."</p>
+          </div>
           <ul class="case-bullets">
             <li>Identified a missing maker-checker control that would have allowed unilateral movement of billions without oversight</li>
             <li>Introduced a novel approval pattern improving operational confidence and auditability</li>
@@ -983,7 +996,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v77</span>
+        <span class="footer-version">v80</span>
       </div>
     </div>
   </footer>
