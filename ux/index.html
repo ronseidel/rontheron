@@ -18,8 +18,37 @@
   <meta name="twitter:description" content="13+ years designing complex, regulated platforms. Currently embedded at a top-tier global investment bank through Publicis Sapient.">
   <meta name="twitter:image" content="https://rontheron.com/og.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+    /* SÖHNE (Klim Type Foundry) — licensed web fonts, self-hosted at /fonts/.
+       Visitors with these loaded see Söhne; otherwise falls back to Instrument Sans. */
+    @font-face {
+      font-family: 'Söhne';
+      src: url('/fonts/soehne-buch.woff2') format('woff2');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('/fonts/soehne-buch-kursiv.woff2') format('woff2');
+      font-weight: 400; font-style: italic; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('/fonts/soehne-kraftig.woff2') format('woff2');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('/fonts/soehne-halbfett.woff2') format('woff2');
+      font-weight: 600; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Söhne';
+      src: url('/fonts/soehne-dreiviertelfett.woff2') format('woff2');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+
     /*
     ============================================================
     PORTFOLIO — Ron Seidel · rontheron.com/ux
@@ -45,17 +74,37 @@
     v35 — 2026-04-08 — Mobile eyebrow: stacked vertically, dots hidden, green line aligned to top
     v36 — 2026-04-08 — Added favicon (SVG, ICO, apple-touch-icon)
     v37 — 2026-04-08 — Replaced Cloudflare email obfuscation with plain mailto links, stripped CF script
+    v38 — 2026-05-31 — Type overhaul: Cartridge (display) + Halant (body), replacing Cormorant Garamond + DM Sans
+    v39 — 2026-05-31 — Wordmark + footer signature changed to "RON SEIDEL" (all caps)
+    v40 — 2026-05-31 — Hero: full-width green rule under meta line (removed leading dash); headline uncapped + scaled up
+    v41 — 2026-05-31 — Removed forced <br> in hero headline; line breaks now handled by text-wrap: balance
+    v42 — 2026-05-31 — Resume (ghost) button: green accent instead of muted gray so it no longer reads as disabled
+    v43 — 2026-05-31 — Body font Halant -> Source Serif 4 (real italics, better at small sizes); metric values to Cartridge; quote italics restored + attribution tightened; hero accent word matches headline weight
+    v44 — 2026-05-31 — Fixed "Prudnce" typo + orphaned </small> tag in Prudential impact item
+    v45 — 2026-05-31 — Type system rebuilt: single family (Schibsted Grotesk) everywhere; dropped Cartridge + Source Serif 4; killed all 300 light weights; display moments to 700; quotes upright
+    v46 — 2026-05-31 — Font stack -> Söhne (Klim): real licensed Söhne, local "Test Söhne" for preview, Instrument Sans fallback; commented @font-face scaffold for post-purchase self-hosting
+    v47 — 2026-05-31 — (twin) Instrument Sans comparison build
+    v48 — 2026-05-31 — Söhne chosen. Stat suffixes (%, +, K, min) dropped to weight 600 to balance the heavier + / % glyphs against the 700 digits
+    v49 — 2026-05-31 — Praise quotes: 3 narrow cards -> stacked editorial rows (wide text measure + side attribution, hairline dividers); fixes choppy wrapping
+    v50 — 2026-05-31 — Hero: reduced headline 116->88px + tighter top padding so full composition + CTAs sit above the fold. Featured quote: dropped box/border, now large italic pull-quote with hanging green mark
+    v51 — 2026-05-31 — Centered eyebrow/meta/title on case study 1 to match case study 2; darkened --muted #777 -> #585858 for stronger secondary-text contrast
+    v52 — 2026-05-31 — Copy trim: CS2 title -> "Unifying four systems managing billions"; removed trailing periods from hero + case titles
+    v53 — 2026-05-31 — CS1 title -> "Designing a platform for Tier-1 wealth advisors"
+    v54 — 2026-05-31 — --muted darkened further #585858 -> #444 (the previous step was too subtle to read as a change)
+    v55 — 2026-05-31 — Footer copy ("South Orange, NJ · 2026") was hardcoded to rgba(0,0,0,0.2) — now uses --muted so it's readable; nudged version marker up slightly
+    v56 — 2026-05-31 — Added Söhne Buch Kursiv (400 italic) @font-face to scaffold for the featured pull-quote
+    v57 — 2026-05-31 — Söhne @font-face activated (5 cuts self-hosted at /fonts/); site now renders real Söhne for all visitors, Instrument Sans fallback
     ============================================================
     */
 
     :root {
       --bg:     #F9F9F9;
       --ink:    #0D0D0D;
-      --muted:  #777;
+      --muted:  #444;
       --border: #E2E2E2;
       --accent: #00BB77;
-      --serif:  'Cormorant Garamond', Georgia, serif;
-      --sans:   'DM Sans', system-ui, sans-serif;
+      --display: 'Söhne', 'Test Söhne', 'Instrument Sans', system-ui, sans-serif;
+      --body:    'Söhne', 'Test Söhne', 'Instrument Sans', system-ui, sans-serif;
       --max:    1100px;
       --pad:    clamp(24px, 5vw, 80px);
     }
@@ -63,7 +112,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: var(--sans);
+      font-family: var(--body);
       background: var(--bg);
       color: var(--ink);
       font-size: 16px;
@@ -87,11 +136,10 @@
     }
     nav#nav.scrolled { border-bottom-color: var(--border); }
     .nav-logo {
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
       text-decoration: none;
       color: var(--ink);
     }
@@ -142,7 +190,7 @@
     .bottom-nav-item:hover { color: var(--ink); }
     .bottom-nav-item svg { width: 20px; height: 20px; stroke-width: 1.75; }
     .bottom-nav-label {
-      font-family: var(--sans);
+      font-family: var(--body);
       font-size: 9px;
       font-weight: 500;
       letter-spacing: 0.1em;
@@ -165,47 +213,39 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     #hero {
-      padding-top: 200px;
-      padding-bottom: 140px;
+      padding-top: 132px;
+      padding-bottom: 100px;
       min-height: 100svh;
       display: flex;
       align-items: center;
     }
     .hero-eyebrow {
-      font-family: var(--sans);
-      font-size: 12px;
+      font-family: var(--body);
+      font-size: 13px;
       font-weight: 400;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 24px; height: 1px;
-      background: var(--accent);
-      flex-shrink: 0;
+      margin-bottom: 40px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--accent);
     }
     .eyebrow-title { color: var(--ink); }
     .hero-headline {
-      font-family: var(--serif);
-      font-size: clamp(44px, 7vw, 96px);
-      font-weight: 300;
-      line-height: 1.08;
-      letter-spacing: -0.01em;
+      font-family: var(--display);
+      font-size: clamp(44px, 6.4vw, 88px);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
       color: var(--ink);
-      max-width: 900px;
-      margin-bottom: 52px;
+      max-width: none;
+      margin-bottom: 44px;
       text-wrap: balance;
     }
-    .hero-headline em { font-style: italic; color: var(--accent); }
+    .hero-headline em { font-style: normal; font-weight: inherit; color: var(--accent); }
     .hero-actions { display: flex; gap: 20px; align-items: center; }
     .btn {
-      font-family: var(--sans);
+      font-family: var(--body);
       font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.06em;
@@ -218,11 +258,11 @@
       display: inline-block;
     }
     .btn:hover { background: var(--ink); color: var(--bg); }
-    .btn-ghost { border-color: var(--border); color: var(--muted); }
-    .btn-ghost:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .btn-ghost { border-color: var(--accent); color: var(--accent); }
+    .btn-ghost:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 
     .section-label {
-      font-family: var(--sans);
+      font-family: var(--body);
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.16em;
@@ -249,7 +289,7 @@
       margin-bottom: 24px;
     }
     .case-index {
-      font-family: var(--serif);
+      font-family: var(--body);
       font-size: 13px;
       font-weight: 400;
       color: var(--accent);
@@ -272,9 +312,9 @@
       color: var(--muted);
     }
     .case-title {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-size: clamp(32px, 4.5vw, 58px);
-      font-weight: 400;
+      font-weight: 700;
       line-height: 1.1;
       letter-spacing: -0.01em;
       margin-bottom: 48px;
@@ -297,20 +337,20 @@
     .metric:nth-last-child(-n+3):nth-child(3n+1),
     .metric:nth-last-child(-n+3):nth-child(3n+1) ~ .metric { border-bottom: none; }
     .metric-value {
-      font-family: var(--serif);
+      font-family: var(--display);
       font-size: clamp(36px, 4vw, 56px);
-      font-weight: 300;
+      font-weight: 700;
       line-height: 1;
       color: var(--ink);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
-    .metric-value .accent { color: var(--accent); }
+    .metric-value .accent { color: var(--accent); font-weight: 600; }
     .metric-label {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 400;
       color: var(--muted);
-      line-height: 1.4;
-      letter-spacing: 0.02em;
+      line-height: 1.45;
+      letter-spacing: 0;
     }
     .metric-note {
       font-size: 10px;
@@ -322,7 +362,7 @@
     .metrics-footnote {
       font-size: 12px;
       color: var(--muted);
-      font-weight: 300;
+      font-weight: 400;
       letter-spacing: 0.02em;
       margin-bottom: 48px;
       margin-top: 10px;
@@ -382,7 +422,7 @@
       gap: 48px;
       padding-top: 8px;
     }
-    .case-desc { font-size: 16px; line-height: 1.7; color: var(--ink); font-weight: 300; }
+    .case-desc { font-size: 16px; line-height: 1.7; color: var(--ink); font-weight: 400; }
     .case-bullets { list-style: none; }
     .case-bullets li {
       font-size: 14px;
@@ -402,9 +442,9 @@
       align-items: start;
     }
     .about-bio {
-      font-family: var(--serif);
+      font-family: var(--body);
       font-size: clamp(20px, 2.5vw, 28px);
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.5;
       letter-spacing: -0.01em;
       text-wrap: balance;
@@ -424,7 +464,7 @@
     .expertise-list li:first-child { border-top: 1px solid var(--border); }
     .expertise-list strong { color: var(--ink); font-weight: 500; font-size: 14px; }
     .contact-block { padding-top: 4px; }
-    .contact-block p { font-size: 13px; color: var(--muted); margin-bottom: 16px; font-weight: 300; }
+    .contact-block p { font-size: 13px; color: var(--muted); margin-bottom: 16px; font-weight: 400; }
     .contact-links { display: flex; gap: 20px; flex-wrap: wrap; }
     .contact-links a {
       font-size: 13px;
@@ -443,65 +483,76 @@
     #quotes .section-label { color: rgba(255,255,255,0.3); }
     #quotes .section-label::after { background: rgba(255,255,255,0.1); }
     .quote-featured {
-      padding: 56px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.03);
-      margin-bottom: 48px;
+      padding: 0;
+      border: none;
+      background: none;
+      margin-bottom: 64px;
+      max-width: 1000px;
       display: flex;
       flex-direction: column;
     }
-    .quote-featured .quote-mark { font-size: 100px; }
+    .quote-featured .quote-mark { display: block; font-size: 72px; line-height: 0.5; margin-bottom: 8px; }
     .quote-featured .quote-text {
-      font-size: clamp(22px, 2.8vw, 32px);
-      color: rgba(255,255,255,0.9);
+      font-size: clamp(28px, 3.8vw, 46px);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.22;
+      letter-spacing: -0.015em;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 32px;
     }
     .quote-featured .quote-attr { color: rgba(255,255,255,0.4); }
     .quote-featured .quote-attr strong { color: rgba(255,255,255,0.75); }
     .quotes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      align-items: stretch;
-    }
-    .quote-card {
-      padding: 32px;
-      border: 1px solid rgba(255,255,255,0.06);
       display: flex;
       flex-direction: column;
     }
+    .quote-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 240px;
+      grid-template-areas: "text attr";
+      gap: 56px;
+      align-items: start;
+      padding: 44px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .quotes-grid .quote-card:last-child { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .quotes-grid .quote-mark { display: none; }
+    .quote-card .quote-text { grid-area: text; max-width: 620px; margin-bottom: 0; }
+    .quote-card .quote-attr { grid-area: attr; padding-top: 4px; }
     .quote-mark {
-      font-family: var(--serif);
+      font-family: var(--body);
       font-size: 56px;
       line-height: 0.6;
       color: var(--accent);
       display: block;
       margin-bottom: 18px;
-      font-weight: 300;
+      font-weight: 400;
     }
     .quote-text {
-      font-family: var(--serif);
-      font-size: clamp(16px, 1.8vw, 20px);
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.82);
+      font-family: var(--body);
+      font-size: clamp(17px, 1.8vw, 21px);
+      font-weight: 400;
+      font-style: normal;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.85);
       margin-bottom: 24px;
       flex: 1;
       text-wrap: pretty;
     }
     .quote-attr {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 400;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.4);
       line-height: 1.6;
     }
     .quote-attr strong {
       display: block;
-      color: rgba(255,255,255,0.5);
-      font-weight: 500;
-      margin-bottom: 2px;
+      color: rgba(255,255,255,0.7);
+      font-weight: 600;
+      margin-bottom: 3px;
     }
 
     #impact .impact-list { list-style: none; }
@@ -514,9 +565,9 @@
       border-bottom: 1px solid var(--border);
     }
     #impact .impact-list li:first-child { border-top: 1px solid var(--border); }
-    .impact-year { font-family: var(--serif); font-size: 15px; font-weight: 400; color: var(--muted); }
+    .impact-year { font-family: var(--body); font-size: 15px; font-weight: 400; color: var(--muted); }
     .impact-desc { font-size: 15px; font-weight: 400; color: var(--ink); line-height: 1.5; }
-    .impact-desc small { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; font-weight: 300; }
+    .impact-desc small { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; font-weight: 400; }
 
     footer { border-top: 1px solid var(--border); padding: 48px 0; }
     .footer-inner {
@@ -526,7 +577,7 @@
       gap: 24px;
       flex-wrap: wrap;
     }
-    .footer-sig { font-family: var(--serif); font-size: 18px; font-weight: 300; font-style: italic; color: var(--ink); }
+    .footer-sig { font-family: var(--display); font-size: 20px; font-weight: 700; font-style: normal; color: var(--ink); }
     .footer-links { display: flex; gap: 28px; align-items: center; }
     .footer-links a {
       font-size: 12px;
@@ -538,8 +589,8 @@
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--ink); }
-    .footer-copy { font-size: 12px; color: rgba(0,0,0,0.2); }
-    .footer-version { font-size: 10px; color: rgba(0,0,0,0.1); letter-spacing: 0.05em; }
+    .footer-copy { font-size: 12px; color: var(--muted); }
+    .footer-version { font-size: 10px; color: rgba(0,0,0,0.28); letter-spacing: 0.05em; }
 
     @media (max-width: 768px) {
       section { padding: 72px 0; }
@@ -558,7 +609,7 @@
       .case-body { grid-template-columns: 1fr; gap: 32px; }
       .case-images { grid-template-columns: 1fr; gap: 16px; }
       #about .about-grid { grid-template-columns: 1fr; gap: 48px; }
-      .quotes-grid { grid-template-columns: 1fr; }
+      .quote-card { grid-template-columns: 1fr; grid-template-areas: "text" "attr"; gap: 20px; padding: 32px 0; }
       .quote-featured { padding: 32px; margin-bottom: 32px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
       #impact .impact-list li { grid-template-columns: 52px 1fr; gap: 16px; }
@@ -580,7 +631,7 @@
       .hero-headline { font-size: clamp(36px, 10vw, 56px); margin-bottom: 36px; }
       .metric { padding: 20px 16px; }
       .metric-value { font-size: clamp(28px, 7vw, 42px); }
-      .quote-card { padding: 28px 24px; }
+      .quote-card { padding: 28px 0; }
       .footer-links { flex-wrap: wrap; gap: 16px; }
       .footer-copy { display: none; }
     }
@@ -592,7 +643,7 @@
 <body>
 
   <nav id="nav">
-    <a href="#hero" class="nav-logo">Ron<span>.</span></a>
+    <a href="#hero" class="nav-logo">RON SEIDEL</a>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
@@ -605,7 +656,7 @@
     <div class="container">
       <p class="hero-eyebrow reveal"><span class="eyebrow-items"><span class="eyebrow-title">Product Designer</span><span class="eyebrow-sep">&ensp;·&ensp;</span><span>13+ Years</span><span class="eyebrow-sep">&ensp;·&ensp;</span><span>NYC / NJ / Remote</span></span></p>
       <h1 class="hero-headline reveal" style="transition-delay:0.1s">
-        I make data-rich systems<br>feel <em>simple</em> and predictable.
+        I make data-rich systems feel <em>simple</em> and predictable
       </h1>
       <div class="hero-actions reveal" style="transition-delay:0.2s">
         <a href="#work" class="btn">Work</a>
@@ -620,7 +671,7 @@
     <div class="container">
       <p class="section-label reveal">Selected Work</p>
 
-      <div class="case-study reveal">
+      <div class="case-study case-study--centered reveal">
         <div class="case-meta">
           <span class="case-index">01</span>
           <div class="case-meta-text">
@@ -628,7 +679,7 @@
             <span class="case-sub">Global Investment Bank · 2023 – Present</span>
           </div>
         </div>
-        <h2 class="case-title">Designing the platform wealth advisors use to move billions.</h2>
+        <h2 class="case-title">Designing a platform for Tier-1 wealth advisors</h2>
 
         <div class="case-images reveal">
           <div class="case-image-wrap">
@@ -694,7 +745,7 @@
             <span class="case-sub">Asset Manager · 2022 – 2023</span>
           </div>
         </div>
-        <h2 class="case-title">Unifying four fragmented systems — managing tens of billions daily.</h2>
+        <h2 class="case-title">Unifying four systems managing billions</h2>
 
         <div class="case-images case-images--single case-images--plain reveal">
           <div class="case-image-wrap">
@@ -861,8 +912,7 @@
         </li>
         <li>
           <span class="impact-year">2017–21</span>
-          <span class="impact-desc">Prudnce, disability benefits, and retirement services</small>
-          </span>
+          <span class="impact-desc">Group insurance, disability benefits, and retirement services — Prudential</span>
         </li>
         <li>
           <span class="impact-year">2014–17</span>
@@ -879,7 +929,7 @@
   <footer>
     <div class="container">
       <div class="footer-inner">
-        <span class="footer-sig">Ron M. Seidel</span>
+        <span class="footer-sig">RON SEIDEL</span>
         <div class="footer-links">
           <a href="mailto:hello@ronseidel.com">Email</a>
           <a href="https://linkedin.com/in/ronseidel" target="_blank">LinkedIn</a>
@@ -887,7 +937,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v37</span>
+        <span class="footer-version">v57</span>
       </div>
     </div>
   </footer>
