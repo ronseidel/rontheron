@@ -122,6 +122,12 @@
     v83 — 2026-06-01 — Reordered page to Work -> About -> Impact -> Praise (proof before testimonials); added Impact tab to both navs (5 tabs; Lucide award placeholder icon); desktop active indicator now green 2px underline to match mobile bar; scroll-spy order updated
     v84 — 2026-06-01 — Case copy edits (Ron): CS1 colon opener, "galaxy", tightened closer; CS2 "magnum opus" opener trimmed, Mindy/teachers split into two beats
     v85 — 2026-06-01 — CS2 closer corrected to source: removed invented "six weeks"; exact client quote with ellipsis + [Ron did] bracket; ends on skeptical PM (Jill) "off the charts good!" closing the skeptic arc; added paragraph splits per Ron
+    v86 — 2026-06-01 — Added process-artifact figures after each case body: CS1 value-view + onboarding-flow (2-up); CS2 before/after pair + design-system + maker-checker-flow; new reusable .case-figures/.case-figure/.case-cap + before/after ba-tag system; captions are placeholder copy
+    v87 — 2026-06-01 — About: swapped abstract "Retailers with thousands of SKUs" for concrete "Halted warehouses leave shelves empty across an entire state" (placed with full sentences); added attention/addiction POV beat (.about-pov) between statement and credentials — ported from LinkedIn About
+    v88 — 2026-06-01 — About POV expanded to fuller LinkedIn version (“We’re not optimizing for attention and addiction... Smooth like butter.”); echoes hero butter motif
+    v89 — 2026-06-01 — Separated copy from image scaffolding: removed v86 placeholder figure blocks so the copy improvements (warehouse line, POV, both case rewrites, corrected quotes) are deploy-ready with no broken images; figure CSS retained for clean re-add when real images exist
+    v90 — 2026-06-01 — Hero headline -> "Software that’s smooth like butter" (all-in on the smooth motif; matches About POV)
+    v91 — 2026-06-01 — Anonymized Geoff attribution (Goldman Sachs -> Finance Client) so the page no longer explicitly identifies the current client; Hollywood line stays an allusion only. Fidelity/Prudential (past) left named
     ============================================================
     */
 
@@ -475,6 +481,40 @@
       background: #fff;
     }
 
+    /* Figures, captions, and before/after for case studies */
+    .case-figures {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      margin-top: 48px;
+    }
+    .case-figures.cols-2 { grid-template-columns: 1fr 1fr; }
+    .case-figure { margin: 0; }
+    .case-fig-frame {
+      border: 1px solid var(--border);
+      background: #fff;
+      overflow: hidden;
+    }
+    .case-fig-frame img { display: block; width: 100%; height: auto; }
+    .case-cap {
+      margin-top: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted);
+      text-align: center;
+    }
+    .ba-tag {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .ba-tag.after { color: var(--accent); }
+
     .case-study--centered .case-meta { flex-direction: column; align-items: center; text-align: center; }
     .case-study--centered .case-title { text-align: center; max-width: 860px; margin-left: auto; margin-right: auto; }
     .case-study--centered .metrics-footnote { text-align: center; }
@@ -522,6 +562,14 @@
       line-height: 1.55;
       color: var(--muted);
       margin-top: 28px;
+      max-width: 560px;
+    }
+    .about-pov {
+      font-size: clamp(16px, 1.7vw, 19px);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--ink);
+      margin-top: 24px;
       max-width: 560px;
     }
     .expertise-list { list-style: none; margin-bottom: 48px; }
@@ -684,6 +732,7 @@
       .hero-actions { justify-content: center; gap: 12px; }
       .case-body { grid-template-columns: 1fr; gap: 32px; }
       .case-images { grid-template-columns: 1fr; gap: 16px; }
+      .case-figures.cols-2 { grid-template-columns: 1fr; gap: 28px; }
       #about .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .quote-card { grid-template-columns: 1fr; grid-template-areas: "text" "attr"; gap: 20px; padding: 32px 0; }
       .quote-featured { padding: 0; margin-bottom: 40px; }
@@ -730,7 +779,7 @@
     <div class="container">
       <p class="hero-eyebrow reveal"><span class="eyebrow-items"><span class="eyebrow-title">Product Designer</span><span class="eyebrow-sep">&ensp;·&ensp;</span><span>13+ Years</span><span class="eyebrow-sep">&ensp;·&ensp;</span><span>NYC / NJ / Remote</span></span></p>
       <h1 class="hero-headline reveal" style="transition-delay:0.1s">
-        Software that feels like <em>butter</em>
+        Software that's smooth like <em>butter</em>
       </h1>
       <p class="hero-industries reveal" style="transition-delay:0.15s"><span class="ind-group">Finance <span class="sep">•</span> Logistics <span class="sep">•</span> Cybersecurity</span> <span class="sep sep-fold">•</span> <span class="ind-group">Healthcare <span class="sep">•</span> Gov't</span></p>
       <div class="hero-actions reveal" style="transition-delay:0.2s">
@@ -891,8 +940,9 @@
       <div class="about-grid reveal">
         <div>
           <p class="about-bio">
-            Misclicks become headlines. A late rebalancing moves the market. Breach incidents. Health records. Pensions. Retailers with thousands of SKUs. These are ten-digit ballgames. <strong>Where big players make big moves.</strong> <strong class="payoff">Where top-tier teams call me to design.</strong>
+            Misclicks become headlines. Halted warehouses leave shelves empty across an entire state. A late rebalancing moves the market. Breach incidents. Health records. Pensions. These are ten-digit ballgames. <strong>Where big players make big moves.</strong> <strong class="payoff">Where top-tier teams call me to design.</strong>
           </p>
+          <p class="about-pov">We’re not optimizing for attention and addiction. We want users in and out. Zero errors. Fluid. Smooth like butter.</p>
           <p class="about-sub">
             13+ years across finance, cybersecurity, logistics, healthcare, and government. Currently embedded at a global investment bank through Publicis Sapient.
           </p>
@@ -979,7 +1029,7 @@
         <div class="quote-attr">
           <strong>Geoff Biskupek</strong>
           Principal UI Designer & Design Systems Lead<br>
-          Senior Colleague · Goldman Sachs
+          Senior Colleague · Finance Client
         </div>
       </div>
       <div class="quotes-grid">
@@ -1025,7 +1075,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v85</span>
+        <span class="footer-version">v91</span>
       </div>
     </div>
   </footer>
