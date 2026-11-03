@@ -128,6 +128,7 @@
     v89 — 2026-06-01 — Separated copy from image scaffolding: removed v86 placeholder figure blocks so the copy improvements (warehouse line, POV, both case rewrites, corrected quotes) are deploy-ready with no broken images; figure CSS retained for clean re-add when real images exist
     v90 — 2026-06-01 — Hero headline -> "Software that’s smooth like butter" (all-in on the smooth motif; matches About POV)
     v91 — 2026-06-01 — Anonymized Geoff attribution (Goldman Sachs -> Finance Client) so the page no longer explicitly identifies the current client; Hollywood line stays an allusion only. Fidelity/Prudential (past) left named
+    v92 — 2026-11-02 — Use solid backgrounds for both fixed navigation bars to avoid filtering moving content during scroll
     ============================================================
     */
 
@@ -163,8 +164,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px max(var(--pad), calc((100% - var(--max)) / 2));
-      background: rgba(249,249,249,0.92);
-      backdrop-filter: blur(12px);
+      background: var(--bg);
       border-bottom: 1px solid transparent;
       transition: border-color 0.3s;
     }
@@ -212,8 +212,7 @@
       bottom: 0; left: 0; right: 0;
       top: auto;
       z-index: 200;
-      background: rgba(249,249,249,0.97);
-      backdrop-filter: blur(12px);
+      background: var(--bg);
       border-top: 1px solid var(--border);
     }
     .bottom-nav-inner {
@@ -1075,7 +1074,7 @@
           <a href="https://ronseidel.github.io/assets/ron-seidel-resume.pdf" target="_blank">Resume</a>
         </div>
         <span class="footer-copy">South Orange, NJ · 2026</span>
-        <span class="footer-version">v91</span>
+        <span class="footer-version">v92</span>
       </div>
     </div>
   </footer>
